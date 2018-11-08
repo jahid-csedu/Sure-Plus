@@ -77,6 +77,20 @@
                   <b class="px-1">Expenses</b>
                 </a>
               </li>
+              <li class="nav-item">
+                <div class="dropdown show mx-3">
+                  <i class="fa fa-atom"></i>
+                  <a class="dropdown-toggle mx-1 text-dark" href="#" role="presentation" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <b>Initials</b>
+                  </a>
+
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="/classes">Classes</a>
+                    <a class="dropdown-item" href="/sections">Sections</a>
+                    <a class="dropdown-item" href="#">Fees Types</a>
+                  </div>
+                </div>
+              </li>
             </ul>
 
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
