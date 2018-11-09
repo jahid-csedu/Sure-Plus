@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFeesTypeTable extends Migration
+class DropFeesTypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,7 @@ class CreateFeesTypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('fees_type', function (Blueprint $table) {
-            $table->string('name',50)->primary();
-            $table->string('description')->nullable();
-            $table->timestamps();
-        });
+        //
     }
 
     /**
@@ -27,6 +23,6 @@ class CreateFeesTypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fees_type');
+        //
     }
 }

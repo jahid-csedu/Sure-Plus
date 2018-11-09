@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\FeesType;
+use Auth;
 use Illuminate\Http\Request;
 
-class FeesTypeController extends Controller
+class FeesTypesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +16,11 @@ class FeesTypeController extends Controller
     public function index()
     {
         //
+        if(Auth::check()) {
+            $feesTypes = FeesType::all();
+            return view('feestype.index',['feesTypes'=>$feesTypes]);
+        }
+        return view('/');
     }
 
     /**
@@ -25,6 +31,10 @@ class FeesTypeController extends Controller
     public function create()
     {
         //
+        if(Auth::check()) {
+            return view ('feestype.create');
+        }
+        return view('/');
     }
 
     /**
@@ -36,6 +46,24 @@ class FeesTypeController extends Controller
     public function store(Request $request)
     {
         //
+        if(Auth::check()) {
+            $feesType = new FeesType;
+            $feesType->name = $request->name;
+            $feesType->description = $request->description;
+
+            if($feesType->save()) {
+                $allFeesTypes = FeesType::all();
+                return redirect()
+                    ->route('feestype.index',['feesTypes' => $allFeesTypes])
+                    ->with('success','Fees Type added successfully');
+            }
+
+            return back()
+                ->withInput()
+                ->with('errors','Problem with adding a new Fees Type');
+        }
+
+        return view('/');
     }
 
     /**

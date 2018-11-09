@@ -8,10 +8,10 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-end">
-                        <a class="btn btn-primary btn-sm" href="classes/create">Add New</a>
+                        <a class="btn btn-primary btn-sm" href="feestype/create">Add New</a>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <span class="text-uppercase font-weight-bold">All Classes</span>
+                        <span class="text-uppercase font-weight-bold">All Fees Types</span>
                     </div>
                 </div>
 
@@ -21,17 +21,15 @@
                         <tr>
                           <th scope="col">Sl No.</th>
                           <th scope="col">Name</th>
-                          <th scope="col">Class</th>
                           <th scope="col">Description</th>
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach($classes as $serial=>$class)
+                        @foreach($feesTypes as $serial=>$feesType)
                             <tr>
                               <th scope="row">{{ $serial+1 }}</th>
-                              <td>{{ $class->name }}</td>
-                              <td>{{ $class->class }}</td>
-                              <td>{{ $class->description }}</td>
+                              <td>{{ $feesType->name }}</td>
+                              <td>{{ $feesType->description }}</td>
                             </tr>
                         @endforeach
                       </tbody>

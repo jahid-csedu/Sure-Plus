@@ -61,12 +61,12 @@ class SectionsController extends Controller
                 $allSections = DB::table('sections')->get();
                 return redirect()
                     ->route('sections.index',['sections' => $allSections])
-                    ->with('success','Class added successfully');
+                    ->with('success','Section added successfully');
             }
 
             return back()
                 ->withInput()
-                ->with('errors','Problem with adding a new class');
+                ->with('errors','Problem with adding a new Section');
         }
 
         return view('/');

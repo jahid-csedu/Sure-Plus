@@ -22,7 +22,7 @@ class ClassesController extends Controller
             return view('classes.index',['classes' => $classes]);
         }
         
-        return back()->with('errors','Please Log in first');
+        return view('/');
         
     }
 
@@ -37,6 +37,7 @@ class ClassesController extends Controller
         if(Auth::check()) {
             return view('classes.create');
         }
+        return view('/');
     }
 
     /**
@@ -49,13 +50,12 @@ class ClassesController extends Controller
     {
         //
         if(Auth::check()) {
-            $classes = Classes::create([
-                'name' =>$request->input('name'),
-                'class' => $request->input('class'),
-                'description' => $request->input('description')
-            ]);
+            $classes = new Classes;
+            $classes->name = $request->input('name');
+            $classes->class = $request->input('class');
+            $classes->description = $request->input('description');
 
-            if($classes) {
+            if($classes->save()) {
                 $allClasses = Classes::all();
                 return redirect()
                     ->route('classes.index',['classes' => $allClasses])

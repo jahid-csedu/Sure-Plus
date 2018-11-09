@@ -22,5 +22,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('students','StudentsController');
 Route::resource('classes','ClassesController');
 Route::resource('sections','SectionsController');
-Route::resource('feestype','FeesTypeController');
+Route::resource('feestype','FeesTypesController');
 Route::resource('fees','FeesController');

@@ -55,6 +55,12 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">
+                  <i class="fas fa-dollar-sign"></i>
+                  <b class="px-1">Fees</b>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
                   <i class="fas fa-user-tie"></i>
                   <b class="px-1">Employees</b>
                 </a>
@@ -87,7 +93,7 @@
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <a class="dropdown-item" href="/classes">Classes</a>
                     <a class="dropdown-item" href="/sections">Sections</a>
-                    <a class="dropdown-item" href="#">Fees Types</a>
+                    <a class="dropdown-item" href="/feestype">Fees Types</a>
                   </div>
                 </div>
               </li>

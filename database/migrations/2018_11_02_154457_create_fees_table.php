@@ -13,16 +13,29 @@ class CreateFeesTable extends Migration
      */
     public function up()
     {
-        Schema::create('fees', function (Blueprint $table) {
-            $table->string('student_id',12);
-            $table->string('type',50);
-            $table->integer('amount')->unsigned();
-            $table->timestamps();
+        if(!hasTable('fees')) {
+            Schema::create('fees', function (Blueprint $table) {
+                $table->string('student_id',12);
+                $table->string('type',50);
+                $table->integer('amount')->unsigned();
+                $table->timestamps();
 
-            $table->primary(['student_id','type']);
-            $table->foreign('student_id')->references('id')->on('students');
-            $table->foreign('type')->references('name')->on('fees_type');
-        });
+                $table->primary(['student_id','type']);
+                $table->foreign('student_id')->references('id')->on('students');
+                $table->foreign('type')->references('name')->on('fees_type');
+            });
+        }else {
+            Schema::table('fees', function (Blueprint $table) {
+                $table->string('student_id',12);
+                $table->string('type',50);
+                $table->integer('amount')->unsigned();
+                $table->timestamps();
+
+                $table->primary(['student_id','type']);
+                $table->foreign('student_id')->references('id')->on('students');
+                $table->foreign('type')->references('name')->on('fees_types');
+            });
+        }
     }
 
     /**

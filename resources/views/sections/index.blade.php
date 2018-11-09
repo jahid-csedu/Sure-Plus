@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-end">
-                        <a class="btn btn-primary btn-sm" href="sections/create">Add New Section</a>
+                        <a class="btn btn-primary btn-sm" href="sections/create">Add New</a>
                     </div>
                     <div class="d-flex justify-content-center">
                         <span class="text-uppercase font-weight-bold">All Sections</span>
