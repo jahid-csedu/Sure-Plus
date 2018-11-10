@@ -14,7 +14,8 @@ class CreateFeesTypesTable extends Migration
     public function up()
     {
         Schema::create('fees_types', function (Blueprint $table) {
-            $table->string('name',50)->primary();
+            $table->increments('id');
+            $table->string('name',50);
             $table->string('description')->nullable();
             $table->timestamps();
         });

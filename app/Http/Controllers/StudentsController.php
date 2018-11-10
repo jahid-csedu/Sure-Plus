@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Student;
+use App\Classes;
+use App\Section;
 use Illuminate\Http\Request;
 
 class StudentsController extends Controller
@@ -15,6 +17,8 @@ class StudentsController extends Controller
     public function index()
     {
         //
+        $students = Student::all();
+        return view('student.index',['students'=>$students]);
     }
 
     /**
@@ -25,6 +29,9 @@ class StudentsController extends Controller
     public function create()
     {
         //
+        $classes = Classes::all();
+        $sections = Section::all();
+        return view('student.create',['classes'=>$classes, 'sections'=>$sections]);
     }
 
     /**

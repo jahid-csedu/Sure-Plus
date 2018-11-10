@@ -19,8 +19,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('students','StudentsController');
-Route::resource('classes','ClassesController');
-Route::resource('sections','SectionsController');
-Route::resource('feestype','FeesTypesController');
-Route::resource('fees','FeesController');
+Route::middleware(['auth'])->group(function () {
+
+	Route::resource('students','StudentsController');
+	Route::resource('classes','ClassesController');
+	Route::resource('sections','SectionsController');
+	Route::resource('feestype','FeesTypesController');
+	Route::resource('fees','FeesController');
+
+});

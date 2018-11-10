@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Fees;
+use App\FeesType;
 use Illuminate\Http\Request;
 
 class FeesController extends Controller
@@ -25,6 +26,8 @@ class FeesController extends Controller
     public function create()
     {
         //
+        $feesTypes = FeesType::all();
+        return view('fees.create',['feesTypes'=>$feesTypes]);
     }
 
     /**

@@ -6,7 +6,7 @@
         Add A New Section
     </h2>
     <hr>
-    <form method="post" action={{ route('sections.store') }}>
+    <form method="post" action="{{ route('sections.store') }}">
         @csrf
         <div class="form-group row">
             <label class="col-sm-2 col-sm-label text-right" for="name">Section Name<span class="required text-danger">*</span></label>

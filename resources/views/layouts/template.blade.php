@@ -48,13 +48,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/students">
                   <i class="fas fa-users"></i>
                   <b class="px-1">Students</b>
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/fees/create">
                   <i class="fas fa-dollar-sign"></i>
                   <b class="px-1">Fees</b>
                 </a>

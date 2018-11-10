@@ -86,6 +86,9 @@ class FeesTypesController extends Controller
     public function edit(FeesType $feesType)
     {
         //
+        //$feesType = FeesType::find($feesType->id);
+        dd($feesType);
+        return view('feestype.edit',['feesType'=>$feesType]);
     }
 
     /**

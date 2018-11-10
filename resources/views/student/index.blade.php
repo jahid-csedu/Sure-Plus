@@ -8,10 +8,10 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-end">
-                        <a class="btn btn-primary btn-sm" href="feestype/create">Add New</a>
+                        <a class="btn btn-primary btn-sm" href="students/create">Add New</a>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <span class="text-uppercase font-weight-bold">All Fees Types</span>
+                        <span class="text-uppercase font-weight-bold">All Students</span>
                     </div>
                 </div>
 
@@ -20,20 +20,21 @@
                       <thead>
                         <tr>
                           <th scope="col">Sl No.</th>
+                          <th scope="col">ID</th>
                           <th scope="col">Name</th>
-                          <th scope="col">Description</th>
-                          <th scope="col">Actions</th>
+                          <th scope="col">Class</th>
+                          <th scope="col">Shift</th>
+                          <th scope="col">Section</th>
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach($feesTypes as $serial=>$feesType)
+                        @foreach($students as $serial=>$student)
                             <tr>
                               <th scope="row">{{ $serial+1 }}</th>
-                              <td>{{ $feesType->name }}</td>
-                              <td>{{ $feesType->description }}</td>
-                              <td>
-                                  <a href="{{ route('feestype.edit',$feesType) }}" class="btn btn-info btn-sm">Edit</a>
-                              </td>
+                              <td>{{ $student->name }}</td>
+                              <td>{{ $student->class }}</td>
+                              <td>{{ $student->shift }}</td>
+                              <td>{{ $student->section }}</td>
                             </tr>
                         @endforeach
                       </tbody>

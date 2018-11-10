@@ -6,7 +6,7 @@
         Add a new class
     </h2>
     <hr>
-    <form method="post" action="{{ route('classes.update',[$class]) }}">
+    <form method="post" action="{{ route('classes.update',$class) }}">
         @csrf
         <div class="form-group row">
             <label class="col-sm-2 col-sm-label text-right" for="name">Class Name<span class="required">*</span></label>

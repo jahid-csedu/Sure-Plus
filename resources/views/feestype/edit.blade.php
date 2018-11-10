@@ -3,13 +3,14 @@
 @section('content')
 <div class="container py-3">
     <h2 class="text-center">
-        Add A New Fees Type
+        Update An Existing Fees Type
     </h2>
     <hr>
-    <form method="post" action="{{ route('feestype.store') }}">
+    <form method="post" action="#">
         @csrf
+        <input type="hidden" name="_method" value="put">
         <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="name">Type Name<span class="required text-danger">*</span></label>
+            <label class="col-sm-2 col-sm-label text-right" for="name" value={{ $feesType->name }}>Type Name<span class="required text-danger">*</span></label>
            <input placeholder="Enter Name"
                 id="name"
                 required
@@ -19,7 +20,7 @@
                 />
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="class">Description</label>
+            <label class="col-sm-2 col-sm-label text-right" for="class" value="{{ $feesType->description }}">Description</label>
             <input placeholder="Enter Description"
                 id="description"
                 name="description"
