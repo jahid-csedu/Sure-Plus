@@ -50,7 +50,7 @@ class ClassesController extends Controller
     {
         //
         if(Auth::check()) {
-            $classes = new Classes;
+            $classes = new Classes();
             $classes->name = $request->input('name');
             $classes->class = $request->input('class');
             $classes->description = $request->input('description');

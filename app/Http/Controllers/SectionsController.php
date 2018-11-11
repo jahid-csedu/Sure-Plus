@@ -51,7 +51,7 @@ class SectionsController extends Controller
     {
         //
         if(Auth::check()) {
-            $section = new Section;
+            $section = new Section();
             $section->name = $request->name;
             $section->class = $request->class;
             $section->shift = $request->shift;

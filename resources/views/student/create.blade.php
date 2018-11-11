@@ -47,10 +47,10 @@
                 style="resize: vertical;" 
                 spellcheck="false"
                 class="form-control col-sm-9"
-                >Present Address</textarea>
+                ></textarea>
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="perm_address">Present Address</label>
+            <label class="col-sm-2 col-sm-label text-right" for="perm_address">Permanent Address</label>
            <textarea placeholder="Enter Permanent Address"
                 id="perm_address"
                 name="perm_address"
@@ -58,7 +58,7 @@
                 style="resize: vertical;" 
                 spellcheck="false"
                 class="form-control col-sm-9"
-                >Permanent Address</textarea>
+                ></textarea>
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-sm-label text-right" for="s_phone">Student's Phone Number</label>

@@ -23,7 +23,6 @@
                           <th scope="col">ID</th>
                           <th scope="col">Name</th>
                           <th scope="col">Class</th>
-                          <th scope="col">Shift</th>
                           <th scope="col">Section</th>
                         </tr>
                       </thead>
@@ -31,9 +30,9 @@
                         @foreach($students as $serial=>$student)
                             <tr>
                               <th scope="row">{{ $serial+1 }}</th>
+                              <td>{{ $student->id }}</td>
                               <td>{{ $student->name }}</td>
                               <td>{{ $student->class }}</td>
-                              <td>{{ $student->shift }}</td>
                               <td>{{ $student->section }}</td>
                             </tr>
                         @endforeach

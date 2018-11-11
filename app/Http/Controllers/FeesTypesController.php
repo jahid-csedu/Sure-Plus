@@ -47,7 +47,7 @@ class FeesTypesController extends Controller
     {
         //
         if(Auth::check()) {
-            $feesType = new FeesType;
+            $feesType = new FeesType();
             $feesType->name = $request->name;
             $feesType->description = $request->description;
 

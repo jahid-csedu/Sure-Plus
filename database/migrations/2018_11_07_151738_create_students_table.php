@@ -20,16 +20,15 @@ class CreateStudentsTable extends Migration
             $table->string('mother_name')->nullable();
             $table->string('present_address')->nullable();
             $table->string('permanent_address')->nullable();
-            $table->string('pesonal_phone',11)->nullable();
+            $table->string('personal_phone',11)->nullable();
             $table->string('father_phone',11)->nullable();
             $table->string('mother_phone',11)->nullable();
-            $table->integer('class');
+            $table->integer('class')->unsigned();
             $table->string('section')->nullable();
             $table->string('group')->nullable();
             $table->string('institute')->nullable();
             $table->date('dob')->nullable();
             $table->string('blood_group',3)->nullable();
-            $table->integer('shift');
             $table->binary('photo')->nullable();
             $table->timestamps();
 
