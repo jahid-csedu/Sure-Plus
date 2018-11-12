@@ -29,6 +29,7 @@ class CreateStudentsTable extends Migration
             $table->string('institute')->nullable();
             $table->date('dob')->nullable();
             $table->string('blood_group',3)->nullable();
+            $table->integer('monthly_fee')->unsigned()->default(0);
             $table->binary('photo')->nullable();
             $table->timestamps();
 

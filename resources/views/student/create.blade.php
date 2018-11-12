@@ -116,14 +116,6 @@
             </select>
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="class">Shift<span class="required text-danger">*</span></label>
-            <select id="shift" name="shift" class="form-control col-sm-9" required>
-                <option>Morning</option>
-                <option>Afternoon</option>
-                <option>Evening</option>
-            </select>
-        </div>
-        <div class="form-group row">
             <label class="col-sm-2 col-sm-label text-right" for="institute">Institute<span class="required text-danger">*</span></label>
            <input placeholder="Enter Institute Name"
                 id="institute"
@@ -156,6 +148,18 @@
                 <option>O+</option>
                 <option>O-</option>
             </select>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-sm-label text-right" for="dob">Monthly Fee<span class="required text-danger">*</span></label>
+            <input type="number" 
+                placeholder="Enter Amount" 
+                value="0"
+                required 
+                id="fee"
+                name="fee"
+                spellcheck="false"
+                class="form-control col-sm-9"
+                />
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-sm-label text-right" for="dob">Photo</label>

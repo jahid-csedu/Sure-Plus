@@ -17,7 +17,7 @@ class StudentsController extends Controller
     public function index()
     {
         //
-        $students = Student::all();
+        $students = Student::orderBy('class','desc')->get();
         return view('student.index',['students'=>$students]);
     }
 
@@ -58,12 +58,32 @@ class StudentsController extends Controller
         $student->institute = $request->institute;
         $student->dob = $request->dob;
         $student->blood_group = $request->blood_group;
+        $student->monthly_fee = $request->fee;
 
-        $getSection = Section::where('name',$request->section)->first();
-        $student->shift = $getSection->shift;
-
-        $idSerial = Student::count()+1;
-        $id = $request->class.date('Y').$idSerial;
+        $lastStudent = Student::where('class',$request->class)->orderBy('created_at','desc')->first();
+        $id=null;
+        if($lastStudent) {
+            $lastId = $lastStudent->id;
+            $idSerial = (int)substr($lastId, 6)+1;
+            if($idSerial<10) {
+                $id = $request->class.date('Y').'0'.$idSerial;
+            }else {
+                $id = $request->class.date('Y').$idSerial;
+            }
+            if($request->class < 10) {
+                $id = '0'.$id;
+            }
+        }else {
+            $idSerial = 1;
+            if($idSerial<10) {
+                $id = $request->class.date('Y').'0'.$idSerial;
+            }else {
+                $id = $request->class.date('Y').$idSerial;
+            }
+            if($request->class < 10) {
+                $id = '0'.$id;
+            }
+        }
 
         $student->id = $id;
 

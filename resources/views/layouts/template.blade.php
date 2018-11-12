@@ -84,18 +84,16 @@
                 </a>
               </li>
               <li class="nav-item">
-                <div class="dropdown show mx-3">
-                  <i class="fa fa-atom"></i>
-                  <a class="dropdown-toggle mx-1 text-dark" href="#" role="presentation" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <b>Initials</b>
-                  </a>
-
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="/classes">Classes</a>
-                    <a class="dropdown-item" href="/sections">Sections</a>
-                    <a class="dropdown-item" href="/feestype">Fees Types</a>
-                  </div>
-                </div>
+                <a class="nav-link" href="/classes">
+                  <i class="fas fa-bell "></i>
+                  <b class="px-1">Classes</b>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/sections">
+                  <i class="fas fa-book"></i>
+                  <b class="px-1">Sections</b>
+                </a>
               </li>
             </ul>
 

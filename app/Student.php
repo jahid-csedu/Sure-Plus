@@ -25,7 +25,7 @@ class Student extends Model
     	'institute',
     	'dob',
     	'blood_group',
-    	'shift',
+        'monthly_fee',
     	'photo'
     ];
 
@@ -37,7 +37,4 @@ class Student extends Model
     	return $this->belongsTo('App\Section');
     }
 
-    public function fees() {
-    	return $this->belongsToMany('App\Fees');
-    }
 }
