@@ -66,22 +66,32 @@ class StudentsController extends Controller
             $lastId = $lastStudent->id;
             $idSerial = (int)substr($lastId, 6)+1;
             if($idSerial<10) {
-                $id = $request->class.date('Y').'0'.$idSerial;
+                if($request->class <10) {
+                    $id = date('Y').'0'.$request->class.'0'.$idSerial;
+                }else {
+                    $id = date('Y').$request->class.'0'.$idSerial;
+                }
             }else {
-                $id = $request->class.date('Y').$idSerial;
-            }
-            if($request->class < 10) {
-                $id = '0'.$id;
+                if($request->class <10) {
+                    $id = date('Y').'0'.$request->class.$idSerial;
+                }else {
+                    $id = date('Y').$request->class.$idSerial;
+                }
             }
         }else {
             $idSerial = 1;
             if($idSerial<10) {
-                $id = $request->class.date('Y').'0'.$idSerial;
+                if($request->class <10) {
+                    $id = date('Y').'0'.$request->class.'0'.$idSerial;
+                }else {
+                    $id = date('Y').$request->class.'0'.$idSerial;
+                }
             }else {
-                $id = $request->class.date('Y').$idSerial;
-            }
-            if($request->class < 10) {
-                $id = '0'.$id;
+                if($request->class <10) {
+                    $id = date('Y').'0'.$request->class.$idSerial;
+                }else {
+                    $id = date('Y').$request->class.$idSerial;
+                }
             }
         }
 
@@ -138,5 +148,10 @@ class StudentsController extends Controller
     public function destroy(Student $student)
     {
         //
+    }
+
+    public function showFees(Student $student) {
+        $students = Student::all();
+        return view('fees',['students'=>$students]);
     }
 }

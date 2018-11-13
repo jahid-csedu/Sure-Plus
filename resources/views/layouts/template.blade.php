@@ -54,7 +54,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/fees/create">
+                <a class="nav-link" href="/fees">
                   <i class="fas fa-dollar-sign"></i>
                   <b class="px-1">Fees</b>
                 </a>
