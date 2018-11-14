@@ -52,7 +52,7 @@ class StudentsController extends Controller
         $student->name = $request->s_name;
         $student->father_name = $request->f_name;
         $student->mother_name = $request->m_name;
-        $student->present_address = $request->pres_name;
+        $student->present_address = $request->pres_address;
         $student->permanent_address = $request->perm_address;
         $student->personal_phone = $request->s_phone;
         $student->father_phone = $request->f_phone;
@@ -106,9 +106,9 @@ class StudentsController extends Controller
         //file Upload
         if($request->hasFile('photo')) {
             $request->file('photo')->storeAs('public/photos',$id);
+            $student->photo = $id;
         }
 
-        $student->photo = $id;
 
         if($student->save()) {
             return redirect()->route('students.index',['students'=>Student::all()])
@@ -140,6 +140,9 @@ class StudentsController extends Controller
     public function edit(Student $student)
     {
         //
+        $classes = Classes::all();
+        $sections = Section::all();
+        return view('student.edit',['student'=>$student, 'classes'=>$classes, 'sections'=>$sections]);
     }
 
     /**
@@ -152,6 +155,41 @@ class StudentsController extends Controller
     public function update(Request $request, Student $student)
     {
         //
+
+        $request->validate([
+            'photo'=>'image|nullable|max:2048'
+        ]);
+
+        $student = Student::find($student->id);
+        $student->name = $request->s_name;
+        $student->father_name = $request->f_name;
+        $student->mother_name = $request->m_name;
+        $student->present_address = $request->pres_address;
+        $student->permanent_address = $request->perm_address;
+        $student->personal_phone = $request->s_phone;
+        $student->father_phone = $request->f_phone;
+        $student->mother_phone = $request->m_phone;
+        $student->class = $request->class;
+        $student->section = $request->section;
+        $student->group = $request->group;
+        $student->institute = $request->institute;
+        $student->dob = $request->dob;
+        $student->blood_group = $request->blood_group;
+        $student->monthly_fee = $request->fee;
+
+        //file Upload
+        if($request->hasFile('photo')) {
+            $request->file('photo')->storeAs('public/photos',$student->id);
+            $student->photo = $student->id;
+        }
+
+
+        if($student->save()) {
+            return redirect()->route('students.show',['student'=>$student])
+                ->with('success','The student was updated successfully');
+        }
+
+        return back()->withInput()->with('errors','Problem with updating the student, Please Try again');
     }
 
     /**
@@ -163,6 +201,12 @@ class StudentsController extends Controller
     public function destroy(Student $student)
     {
         //
+        //$student = Student::find($student->id);
+        if($student->delete()) {
+            return redirect()->route('students.index')->with('success','The student was deleted successfully');
+        }
+
+        return back()->withInput()->with('errors','Problem with deleting the student');
     }
 
     public function showFees(Student $student) {

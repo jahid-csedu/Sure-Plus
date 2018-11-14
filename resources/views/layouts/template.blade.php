@@ -42,7 +42,7 @@
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" href="#">
+                <a class="nav-link active" href="/home">
                   <i class="fas fa-home"></i>
                   <b class="px-1">Dashboard</b> <span class="sr-only">(current)</span>
                 </a>
