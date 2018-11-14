@@ -14,13 +14,13 @@ class CreateSectionsTable extends Migration
     public function up()
     {
         Schema::create('sections', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('name',50);
             $table->integer('class')->unsigned();
             $table->string('description')->nullable();
             $table->string('shift');
             $table->timestamps();
 
-            $table->primary(['name','class']);
             $table->foreign('class')->references('class')->on('classes');
         });
     }

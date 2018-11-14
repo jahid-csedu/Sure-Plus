@@ -34,7 +34,7 @@ class CreateStudentsTable extends Migration
             $table->timestamps();
 
             $table->foreign('class')->references('class')->on('classes');
-            $table->foreign('section')->references('name')->on('sections');
+            $table->foreign('section')->references('id')->on('sections');
         });
     }
 

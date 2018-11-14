@@ -19,7 +19,7 @@ class SectionsController extends Controller
     {
         //
         if(Auth::check()) {
-            $sections = DB::table('sections')->get();
+            $sections = Section::orderBy('class')->get();
             return view('sections.index',['sections'=>$sections]);
         }
         return view('/');
@@ -34,7 +34,7 @@ class SectionsController extends Controller
     {
         //
         if(Auth::check()) {
-            $classes = DB::table('classes')->get();
+            $classes = Classes::all();
             return view('sections.create',['classes'=>$classes]);
         }
 
@@ -58,7 +58,7 @@ class SectionsController extends Controller
             $section->description = $request->description;
 
             if($section->save()) {
-                $allSections = DB::table('sections')->get();
+                $allSections = Section::all();
                 return redirect()
                     ->route('sections.index',['sections' => $allSections])
                     ->with('success','Section added successfully');
@@ -92,6 +92,8 @@ class SectionsController extends Controller
     public function edit(Section $section)
     {
         //
+        $classes = Classes::all();
+        return view('sections.edit',['section'=>$section,'classes'=>$classes]);
     }
 
     /**
@@ -104,6 +106,22 @@ class SectionsController extends Controller
     public function update(Request $request, Section $section)
     {
         //
+        $section = Section::find($section->id);
+        $section->name = $request->name;
+        $section->class = $request->class;
+        $section->shift = $request->shift;
+        $section->description = $request->description;
+
+        if($section->save()) {
+            $allSections = Section::orderBy('class')->get();
+            return redirect()
+                ->route('sections.index',['sections' => $allSections])
+                ->with('success','Section updated successfully');
+        }
+
+        return back()
+            ->withInput()
+            ->with('errors','Problem with updating the Section');
     }
 
     /**
@@ -115,5 +133,10 @@ class SectionsController extends Controller
     public function destroy(Section $section)
     {
         //
+        if($section->delete()) {
+            return redirect()->route('sections.index')->with('success','The section was deleted successfully');
+        }
+
+        return back()->withInput()->with('errors','Problem with deleting the section');
     }
 }
