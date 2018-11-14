@@ -6,7 +6,7 @@
         Add A New Student
     </h2>
     <hr>
-    <form method="post" action="{{ route('students.store') }}">
+    <form method="post" action="{{ route('students.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="form-group row">
             <label class="col-sm-2 col-sm-label text-right" for="s_name">Student's Name<span class="required text-danger">*</span></label>
@@ -150,7 +150,7 @@
             </select>
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="dob">Monthly Fee<span class="required text-danger">*</span></label>
+            <label class="col-sm-2 col-sm-label text-right" for="fee">Monthly Fee<span class="required text-danger">*</span></label>
             <input type="number" 
                 placeholder="Enter Amount" 
                 value="0"
@@ -162,11 +162,11 @@
                 />
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="dob">Photo</label>
+            <label class="col-sm-2 col-sm-label text-right" for="photo">Photo</label>
             <input type="file" 
                 accept=".jpg, .jpeg, .png" 
-                id="dob"
-                name="dob"
+                id="photo"
+                name="photo"
                 spellcheck="false"
                 class="form-control col-sm-9"
                 />

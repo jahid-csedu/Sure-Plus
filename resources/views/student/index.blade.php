@@ -24,16 +24,18 @@
                           <th scope="col">Name</th>
                           <th scope="col">Class</th>
                           <th scope="col">Section</th>
+                          <th scope="col">Action</th>
                         </tr>
                       </thead>
                       <tbody>
                         @foreach($students as $serial=>$student)
-                            <tr>
+                            <tr data-href="/students/{{ $student }}">
                               <th scope="row">{{ $serial+1 }}</th>
                               <td>{{ $student->id }}</td>
                               <td>{{ $student->name }}</td>
                               <td>{{ $student->class }}</td>
                               <td>{{ $student->section }}</td>
+                              <td><a class="btn btn-info btn-sm" href="/students/{{ $student->id }}">Show Details</a></td>
                             </tr>
                         @endforeach
                       </tbody>

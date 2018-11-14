@@ -43,6 +43,11 @@ class StudentsController extends Controller
     public function store(Request $request)
     {
         //
+
+        $request->validate([
+            'photo'=>'image|nullable|max:2048'
+        ]);
+
         $student = new Student();
         $student->name = $request->s_name;
         $student->father_name = $request->f_name;
@@ -60,9 +65,10 @@ class StudentsController extends Controller
         $student->blood_group = $request->blood_group;
         $student->monthly_fee = $request->fee;
 
+        //generating the Student ID
         $lastStudent = Student::where('class',$request->class)->orderBy('created_at','desc')->first();
         $id=null;
-        if($lastStudent) {
+        if($lastStudent) {//if previous student exists of this class
             $lastId = $lastStudent->id;
             $idSerial = (int)substr($lastId, 6)+1;
             if($idSerial<10) {
@@ -78,7 +84,7 @@ class StudentsController extends Controller
                     $id = date('Y').$request->class.$idSerial;
                 }
             }
-        }else {
+        }else {//if no previous student exists of this class
             $idSerial = 1;
             if($idSerial<10) {
                 if($request->class <10) {
@@ -97,6 +103,13 @@ class StudentsController extends Controller
 
         $student->id = $id;
 
+        //file Upload
+        if($request->hasFile('photo')) {
+            $request->file('photo')->storeAs('public/photos',$id);
+        }
+
+        $student->photo = $id;
+
         if($student->save()) {
             return redirect()->route('students.index',['students'=>Student::all()])
                 ->with('success','The student was added successfully with ID "'.$id.'"');
@@ -114,6 +127,8 @@ class StudentsController extends Controller
     public function show(Student $student)
     {
         //
+        $student = Student::find($student->id);
+        return view('student.show',['student'=>$student]);
     }
 
     /**
@@ -151,7 +166,7 @@ class StudentsController extends Controller
     }
 
     public function showFees(Student $student) {
-        $students = Student::all();
+        $students = Student::orderBy('class','desc')->get();
         return view('fees',['students'=>$students]);
     }
 }
