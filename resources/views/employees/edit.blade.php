@@ -3,41 +3,19 @@
 @section('content')
 <div class="container py-3">
     <h2 class="text-center">
-        Update Student Information
+        Add A New Employee
     </h2>
     <hr>
-    <form method="post" action="/students/{{ $student->id }}" enctype="multipart/form-data">
+    <form method="post" action="{{ route('employees.update', $employee) }}" enctype="multipart/form-data">
         @csrf
-        <input type="hidden" name="_method" value="put">
+        @method('PUT')
         <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="s_name">Student's Name<span class="required text-danger">*</span></label>
-           <input placeholder="Enter Student's Name"
-                value="{{ $student->name }}" 
-                id="s_name"
+            <label class="col-sm-2 col-sm-label text-right" for="s_name">Name<span class="required text-danger">*</span></label>
+           <input placeholder="Enter Employee's Name"
+                value="{{ $employee->name }}" 
+                id="name"
                 required
-                name="s_name"
-                spellcheck="false"
-                class="form-control col-sm-9"
-                />
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="f_name">Father's Name<span class="required text-danger">*</span></label>
-           <input placeholder="Enter Father's Name"
-                value="{{ $student->father_name }}" 
-                id="f_name"
-                required
-                name="f_name"
-                spellcheck="false"
-                class="form-control col-sm-9"
-                />
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="m_name">Mother's Name<span class="required text-danger">*</span></label>
-           <input placeholder="Enter Mother's Name"
-                value="{{ $student->mother_name }}" 
-                id="m_name"
-                required
-                name="m_name"
+                name="name"
                 spellcheck="false"
                 class="form-control col-sm-9"
                 />
@@ -45,9 +23,9 @@
         <div class="form-group row">
             <label class="col-sm-2 col-sm-label text-right" for="pres_address">Present Address</label>
            <textarea placeholder="Enter Present Address"
-                value="{{ $student->present_address }}" 
-                id="pres_address"
-                name="pres_address"
+                value="{{ $employee->present_address }}" 
+                id="present_address"
+                name="present_address"
                 rows="4"
                 style="resize: vertical;" 
                 spellcheck="false"
@@ -57,9 +35,9 @@
         <div class="form-group row">
             <label class="col-sm-2 col-sm-label text-right" for="perm_address">Permanent Address</label>
            <textarea placeholder="Enter Permanent Address"
-                value="{{ $student->permanent_address }}" 
-                id="perm_address"
-                name="perm_address"
+                value="{{ $employee->permanent_address }}" 
+                id="permanent_address"
+                name="permanent_address"
                 rows="4"
                 style="resize: vertical;" 
                 spellcheck="false"
@@ -67,93 +45,23 @@
                 ></textarea>
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="s_phone">Student's Phone Number</label>
+            <label class="col-sm-2 col-sm-label text-right" for="s_phone">Phone Number</label>
            <input placeholder="Enter Phone Number"
-                value="{{ $student->personal_phone }}" 
+                value="{{ $employee->phone }}" 
                 type="phone" 
-                id="s_phone"
-                name="s_phone"
+                id="phone"
+                name="phone"
                 spellcheck="false"
                 class="form-control col-sm-9"
                 />
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="f_phone">Father's Phone Number</label>
-           <input placeholder="Enter Phone Number"
-                value="{{ $student->father_phone }}" 
-                type="phone" 
-                id="f_phone"
-                name="f_phone"
-                spellcheck="false"
-                class="form-control col-sm-9"
-                />
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="m_phone">Mother's Phone Number</label>
-           <input placeholder="Enter Phone Number"
-                value="{{ $student->mother_phone }}" 
-                type="phone" 
-                id="m_phone"
-                name="m_phone"
-                spellcheck="false"
-                class="form-control col-sm-9"
-                />
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="class">Class<span class="required text-danger">*</span></label>
-            <select id="class" name="class" class="form-control col-sm-9" required>
-                <option selected>{{$student->class}}</option>
-            </select>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="class">Section</label>
-            <select id="section" name="section" class="form-control col-sm-9" required>
-                @foreach($sections as $section)
-                    @if($section->name === $student->section)
-                        <option selected>{{$section->name}}</option>
-                    @else
-                        <option>{{$section->name}}</option>
-                    @endif
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="group">Group</label>
-            <select id="group" name="group" class="form-control col-sm-9">
-                @switch($student->group)
-                    @case("Science")
-                        <option>N/A</option>
-                        <option selected>Science</option>
-                        <option>Business Studies</option>
-                        <option>Humanities</option>
-                    @break
-                    @case("Business Studies")
-                        <option>N/A</option>
-                        <option>Science</option>
-                        <option selected>Business Studies</option>
-                        <option>Humanities</option>
-                    @break
-                    @case("Humanities")
-                        <option>N/A</option>
-                        <option>Science</option>
-                        <option>Business Studies</option>
-                        <option selected>Humanities</option>
-                    @break
-                    @default
-                        <option>N/A</option>
-                        <option>Science</option>
-                        <option>Business Studies</option>
-                        <option>Humanities</option>
-                @endswitch
-            </select>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="institute">Institute<span class="required text-danger">*</span></label>
-           <input placeholder="Enter Institute Name"
-                value="{{ $student->institute }}" 
-                id="institute"
+            <label class="col-sm-2 col-sm-label text-right" for="s_name">Designation<span class="required text-danger">*</span></label>
+           <input placeholder="Enter Designation"
+                value="{{ $employee->designation }}" 
+                id="designation"
                 required
-                name="institute"
+                name="designation"
                 spellcheck="false"
                 class="form-control col-sm-9"
                 />
@@ -161,7 +69,7 @@
         <div class="form-group row">
             <label class="col-sm-2 col-sm-label text-right" for="dob">Date of Birth</label>
             <input placeholder="mm/dd/yyyy"
-                value="{{ $student->dob }}" 
+                value="{{ $employee->dob }}" 
                 type="date" 
                 id="dob"
                 name="dob"
@@ -172,7 +80,7 @@
         <div class="form-group row">
             <label class="col-sm-2 col-sm-label text-right" for="blood_group">Blood Group</label>
             <select id="blood_group" name="blood_group" class="form-control col-sm-9">
-                @switch($student->blood_group)
+                @switch($employee->blood_group)
                     @case("A+")
                         <option>N/A</option>
                         <option selected>A+</option>
@@ -273,18 +181,6 @@
                         <option>O-</option>
                 @endswitch
             </select>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="fee">Monthly Fee<span class="required text-danger">*</span></label>
-            <input type="number" 
-                placeholder="Enter Amount" 
-                value="{{ $student->monthly_fee }}"
-                required 
-                id="fee"
-                name="fee"
-                spellcheck="false"
-                class="form-control col-sm-9"
-                />
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-sm-label text-right" for="photo">Photo</label>

@@ -60,7 +60,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/employees">
                   <i class="fas fa-user-tie"></i>
                   <b class="px-1">Employees</b>
                 </a>

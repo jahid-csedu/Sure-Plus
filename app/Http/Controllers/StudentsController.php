@@ -86,18 +86,10 @@ class StudentsController extends Controller
             }
         }else {//if no previous student exists of this class
             $idSerial = 1;
-            if($idSerial<10) {
-                if($request->class <10) {
-                    $id = date('Y').'0'.$request->class.'0'.$idSerial;
-                }else {
-                    $id = date('Y').$request->class.'0'.$idSerial;
-                }
+            if($request->class <10) {
+                $id = date('Y').'0'.$request->class.'0'.$idSerial;
             }else {
-                if($request->class <10) {
-                    $id = date('Y').'0'.$request->class.$idSerial;
-                }else {
-                    $id = date('Y').$request->class.$idSerial;
-                }
+                $id = date('Y').$request->class.'0'.$idSerial;
             }
         }
 

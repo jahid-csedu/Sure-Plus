@@ -87,13 +87,11 @@ class ClassesController extends Controller
      * @param  \App\Classes  $classes
      * @return \Illuminate\Http\Response
      */
-    public function edit(Classes $classes)
+    public function edit(Classes $class)
     {
         //
-        if(Auth::check()) {
-            $classes = Classes::where('class',$classes->class);
-            return view('classes.edit',['class'=>$classes]);
-        }
+        $class = Classes::find($class->id);
+        return view('classes.edit',['class'=>$class]);
     }
 
     /**
@@ -103,9 +101,24 @@ class ClassesController extends Controller
      * @param  \App\Classes  $classes
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Classes $classes)
+    public function update(Request $request, Classes $class)
     {
         //
+        $class = Classes::find($class->id);
+        $class->name = $request->name;
+        $class->class = $request->class;
+        $class->description = $request->description;
+
+        if($class->save()) {
+            $allClasses = Classes::all();
+            return redirect()
+                ->route('classes.index',['classes' => $allClasses])
+                ->with('success','Class updated successfully');
+        }
+
+        return back()
+            ->withInput()
+            ->with('errors','Problem with updating the class');
     }
 
     /**
@@ -114,8 +127,13 @@ class ClassesController extends Controller
      * @param  \App\Classes  $classes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Classes $classes)
+    public function destroy(Classes $class)
     {
         //
+        if($class->delete()) {
+            return redirect()->route('classes.index')->with('success','The class was deleted successfully');
+        }
+
+        return back()->with('errors','Problem with deleting the class');
     }
 }

@@ -33,7 +33,7 @@ class CreateStudentsTable extends Migration
             $table->binary('photo')->nullable();
             $table->timestamps();
 
-            $table->foreign('class')->references('class')->on('classes');
+            $table->foreign('class')->references('id')->on('classes');
             $table->foreign('section')->references('id')->on('sections');
         });
     }

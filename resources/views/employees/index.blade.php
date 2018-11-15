@@ -8,10 +8,10 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-end">
-                        <a class="btn btn-primary btn-sm" href="students/create">Add New</a>
+                        <a class="btn btn-primary btn-sm" href="employees/create">Add New</a>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <span class="text-uppercase font-weight-bold">All Students</span>
+                        <span class="text-uppercase font-weight-bold">All Employees</span>
                     </div>
                 </div>
 
@@ -22,20 +22,20 @@
                           <th scope="col">Sl No.</th>
                           <th scope="col">ID</th>
                           <th scope="col">Name</th>
-                          <th scope="col">Class</th>
-                          <th scope="col">Section</th>
+                          <th scope="col">Designation</th>
+                          <th scope="col">Phone Number</th>
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
                       <tbody>
-                        @foreach($students as $serial=>$student)
-                            <tr>
+                        @foreach($employees as $serial=>$employee)
+                            <tr data-href=>
                               <th scope="row">{{ $serial+1 }}</th>
-                              <td>{{ $student->id }}</td>
-                              <td>{{ $student->name }}</td>
-                              <td>{{ $student->class }}</td>
-                              <td>{{ $student->section }}</td>
-                              <td><a class="btn btn-info btn-sm" href="/students/{{ $student->id }}">Show Details</a></td>
+                              <td>{{ $employee->id }}</td>
+                              <td>{{ $employee->name }}</td>
+                              <td>{{ $employee->designation }}</td>
+                              <td>{{ $employee->phone }}</td>
+                              <td><a class="btn btn-info btn-sm" href="/employees/{{ $employee->id }}">Show Details</a></td>
                             </tr>
                         @endforeach
                       </tbody>

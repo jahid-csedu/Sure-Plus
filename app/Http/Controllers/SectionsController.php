@@ -137,6 +137,6 @@ class SectionsController extends Controller
             return redirect()->route('sections.index')->with('success','The section was deleted successfully');
         }
 
-        return back()->withInput()->with('errors','Problem with deleting the section');
+        return back()->with('errors','Problem with deleting the section');
     }
 }

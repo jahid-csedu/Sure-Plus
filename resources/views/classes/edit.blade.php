@@ -8,6 +8,7 @@
     <hr>
     <form method="post" action="{{ route('classes.update',$class) }}">
         @csrf
+        @method('PUT')
         <div class="form-group row">
             <label class="col-sm-2 col-sm-label text-right" for="name">Class Name<span class="required">*</span></label>
            <input placeholder="Enter Name"
@@ -34,7 +35,7 @@
             <label class="col-sm-2 col-sm-label text-right" for="class">Description (Optional)</label>
             <input placeholder="Enter Description"
                 id="description"
-                value="{{ $classes->description }}" 
+                value="{{ $class->description }}" 
                 name="description"
                 spellcheck="false"
                 class="form-control col-sm-9"

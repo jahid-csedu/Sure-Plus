@@ -21,7 +21,7 @@ class CreateSectionsTable extends Migration
             $table->string('shift');
             $table->timestamps();
 
-            $table->foreign('class')->references('class')->on('classes');
+            $table->foreign('class')->references('id')->on('classes');
         });
     }
 

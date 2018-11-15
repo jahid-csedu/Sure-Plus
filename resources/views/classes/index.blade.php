@@ -23,6 +23,7 @@
                           <th scope="col">Name</th>
                           <th scope="col">Class</th>
                           <th scope="col">Description</th>
+                          <th scope="col">Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -32,6 +33,14 @@
                               <td>{{ $class->name }}</td>
                               <td>{{ $class->class }}</td>
                               <td>{{ $class->description }}</td>
+                              <td>
+                                <form method="POST" action="{{ route('classes.destroy', $class->id) }}">
+                                  @csrf
+                                  @method('DELETE')
+                                  <a class="btn btn-info" href="{{ route('classes.edit', $class->id) }}">Edit</a>
+                                  <button type="submit" class="btn btn-danger mx-3">Delete</button>
+                                </form>
+                              </td>
                             </tr>
                         @endforeach
                       </tbody>
