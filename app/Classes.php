@@ -20,4 +20,8 @@ class Classes extends Model
     public function sections() {
     	return $this->belongsToMany('App\Section');
     }
+
+    public function exams() {
+        return $this->hasMany('App\Exam');
+    }
 }

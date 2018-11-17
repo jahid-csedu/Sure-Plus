@@ -9,6 +9,7 @@ class Student extends Model
     //
     protected $table = 'students';
     protected $primaryKey = 'id';
+    public $incrementing = false;
     protected $fillable = [
         'id',
     	'name',
@@ -35,6 +36,10 @@ class Student extends Model
 
     public function section() {
     	return $this->belongsTo('App\Section');
+    }
+
+    public function result() {
+        return $this->hasMany('App\Result');
     }
 
 }

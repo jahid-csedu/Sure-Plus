@@ -25,7 +25,10 @@ Route::middleware(['auth'])->group(function () {
 	Route::resource('classes','ClassesController');
 	Route::resource('sections','SectionsController');
 	Route::resource('employees','EmployeesController');
+	Route::resource('exams','ExamsController');
+	Route::resource('results','ResultsController');
 
 	Route::get('fees','StudentsController@showFees');
+	Route::get('showResult','ResultsController@showResult');
 
 });

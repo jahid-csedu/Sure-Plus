@@ -72,9 +72,15 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/exams">
                   <i class="fas fa-pen"></i>
                   <b class="px-1">Exams</b>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/results">
+                  <i class="fas fa-id-card"></i>
+                  <b class="px-1">Results</b>
                 </a>
               </li>
               <li class="nav-item">

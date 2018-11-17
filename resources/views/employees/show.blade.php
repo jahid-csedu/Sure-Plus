@@ -52,7 +52,7 @@
                       @if($employee->photo)
                         <img class="img-rounded img-fluid img-thumbnail" src="/storage/photos/{{ $employee->id }}" alt="{{ $employee->name }}" style="max-width: 100%; height: auto">
                       @else
-                        <img class="img-rounded img-fluid img-thumbnail" src="/storage/photos/employee.png" alt="{{ $employee->name }}" style="max-width: 100%; height: auto">
+                        <img class="img-rounded img-fluid img-thumbnail" src="/storage/photos/employee.jpg" alt="{{ $employee->name }}" style="max-width: 100%; height: auto">
                       @endif
 
                       <a class="btn btn-info my-3" href="{{ route('employees.edit', $employee) }}" style="width: 100%; height: 40px"><span style="color:white; font-size: 18px">Edit</span></a>

@@ -23,26 +23,24 @@
         <div class="form-group row">
             <label class="col-sm-2 col-sm-label text-right" for="pres_address">Present Address</label>
            <textarea placeholder="Enter Present Address"
-                value="{{ $employee->present_address }}" 
                 id="present_address"
                 name="present_address"
                 rows="4"
                 style="resize: vertical;" 
                 spellcheck="false"
                 class="form-control col-sm-9"
-                ></textarea>
+                >{{ $employee->present_address }}</textarea>
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-sm-label text-right" for="perm_address">Permanent Address</label>
            <textarea placeholder="Enter Permanent Address"
-                value="{{ $employee->permanent_address }}" 
                 id="permanent_address"
                 name="permanent_address"
                 rows="4"
                 style="resize: vertical;" 
                 spellcheck="false"
                 class="form-control col-sm-9"
-                ></textarea>
+                >{{ $employee->permanent_address }}</textarea>
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-sm-label text-right" for="s_phone">Phone Number</label>

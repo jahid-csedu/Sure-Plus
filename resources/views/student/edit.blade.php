@@ -102,11 +102,17 @@
         <div class="form-group row">
             <label class="col-sm-2 col-sm-label text-right" for="class">Class<span class="required text-danger">*</span></label>
             <select id="class" name="class" class="form-control col-sm-9" required>
-                <option selected>{{$student->class}}</option>
+                @foreach($classes as $class)
+                    @if($student->class === $class)
+                        <option selected>{{$class->class}}</option>
+                    @else
+                        <option>{{$class->class}}</option>
+                    @endif
+                @endforeach
             </select>
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="class">Section</label>
+            <label class="col-sm-2 col-sm-label text-right" for="section">Section</label>
             <select id="section" name="section" class="form-control col-sm-9" required>
                 @foreach($sections as $section)
                     @if($section->name === $student->section)

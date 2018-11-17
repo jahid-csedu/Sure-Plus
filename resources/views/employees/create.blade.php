@@ -41,9 +41,10 @@
                 ></textarea>
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="s_phone">Phone Number</label>
+            <label class="col-sm-2 col-sm-label text-right" for="s_phone">Phone Number<span class="required text-danger">*</span></label>
            <input placeholder="Enter Phone Number"
-                type="phone" 
+                type="phone"
+                required 
                 id="phone"
                 name="phone"
                 spellcheck="false"
@@ -51,7 +52,7 @@
                 />
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="s_phone">Designation</label>
+            <label class="col-sm-2 col-sm-label text-right" for="s_phone">Designation<span class="required text-danger">*</span></label>
            <input placeholder="Enter Designation"
                 id="designation"
                 required 

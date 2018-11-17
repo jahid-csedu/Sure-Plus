@@ -16,6 +16,7 @@ class EmployeesController extends Controller
     {
         //
         $employees = Employee::all();
+        //dd($employees);
         return view('employees.index', ['employees'=>$employees]);
     }
 
@@ -49,18 +50,19 @@ class EmployeesController extends Controller
         $employee->blood_group = $request->blood_group;
 
         //Generating Employee ID
-        $lastEmployee = Employee::orderBy('created_at','desc')->get()->first();
+        $lastEmployee = Employee::orderBy('created_at','desc')->first();
+        //dump((int)substr($lastEmployee->id,5));
         $id=null;
         if($lastEmployee) {
-            $idSerial = (int)substr($lastEmployee->id,5)+1;
-            if($idSerial<10) {
-                $id = 'E'.Date('Y').'0'.idSerial;
+            $idNumber = (int)substr($lastEmployee->id,5)+1;
+            if($idNumber<10) {
+                $id = 'E'.Date('Y').'0'.$idNumber;
             }else {
-                $id = 'E'.Date('Y').idSerial;
+                $id = 'E'.Date('Y').$idNumber;
             }
         }else {
-            $idSerial=1;
-            $id = 'E'.Date('Y').'0'.$idSerial;
+            $idNumber=1;
+            $id = 'E'.Date('Y').'0'.$idNumber;
         }
 
         $employee->id = $id;
@@ -89,7 +91,7 @@ class EmployeesController extends Controller
     public function show(Employee $employee)
     {
         //
-        $epmployee = Employee::find($employee->id);
+        $employee = Employee::find($employee->id);
         return view('employees.show', ['employee'=>$employee]);
     }
 
@@ -102,6 +104,7 @@ class EmployeesController extends Controller
     public function edit(Employee $employee)
     {
         //
+        $employee = Employee::find($employee->id);
         return view('employees.edit', ['employee'=>$employee]);
     }
 
