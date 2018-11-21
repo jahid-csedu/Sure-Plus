@@ -6,11 +6,9 @@
     <div class="row justify-content-center">
         <div class="col-md-12 col-lg-12 col-sm-auto py-3">
             <div class="card">
-                <div class="card-header">
-                    <div class="d-flex justify-content-center">
-                        <span class="text-uppercase font-weight-bold">Monthly Fee of All Student</span>
-                    </div>
-                </div>
+                <center class="card-header justify-content-center">
+                    <a class="btn btn-primary mx-2 pull-right col-md-5" href="#">Search Fees</a>
+                </center>
 
                 <div class="card-body">
                     <table class="table table-striped table-bordered table-hover">

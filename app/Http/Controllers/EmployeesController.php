@@ -54,15 +54,15 @@ class EmployeesController extends Controller
         //dump((int)substr($lastEmployee->id,5));
         $id=null;
         if($lastEmployee) {
-            $idNumber = (int)substr($lastEmployee->id,5)+1;
+            $idNumber = (int)substr($lastEmployee->id,6)+1;
             if($idNumber<10) {
-                $id = 'E'.Date('Y').'0'.$idNumber;
+                $id = '11'.Date('Y').'0'.$idNumber;
             }else {
-                $id = 'E'.Date('Y').$idNumber;
+                $id = '11'.Date('Y').$idNumber;
             }
         }else {
             $idNumber=1;
-            $id = 'E'.Date('Y').'0'.$idNumber;
+            $id = '11'.Date('Y').'0'.$idNumber;
         }
 
         $employee->id = $id;

@@ -70,26 +70,26 @@ class StudentsController extends Controller
         $id=null;
         if($lastStudent) {//if previous student exists of this class
             $lastId = $lastStudent->id;
-            $idSerial = (int)substr($lastId, 7)+1;
+            $idSerial = (int)substr($lastId, 8)+1;
             if($idSerial<10) {
                 if($request->class <10) {
-                    $id = 'S'.date('Y').'0'.$request->class.'0'.$idSerial;
+                    $id = '10'.date('Y').'0'.$request->class.'0'.$idSerial;
                 }else {
-                    $id = 'S'.date('Y').$request->class.'0'.$idSerial;
+                    $id = '10'.date('Y').$request->class.'0'.$idSerial;
                 }
             }else {
                 if($request->class <10) {
-                    $id = 'S'.date('Y').'0'.$request->class.$idSerial;
+                    $id = '10'.date('Y').'0'.$request->class.$idSerial;
                 }else {
-                    $id = 'S'.date('Y').$request->class.$idSerial;
+                    $id = '10'.date('Y').$request->class.$idSerial;
                 }
             }
         }else {//if no previous student exists of this class
             $idSerial = 1;
             if($request->class <10) {
-                $id = 'S'.date('Y').'0'.$request->class.'0'.$idSerial;
+                $id = '10'.date('Y').'0'.$request->class.'0'.$idSerial;
             }else {
-                $id = 'S'.date('Y').$request->class.'0'.$idSerial;
+                $id = '10'.date('Y').$request->class.'0'.$idSerial;
             }
         }
 
@@ -205,4 +205,5 @@ class StudentsController extends Controller
         $students = Student::orderBy('class','desc')->get();
         return view('fees',['students'=>$students]);
     }
+
 }

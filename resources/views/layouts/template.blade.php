@@ -12,6 +12,10 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
@@ -66,7 +70,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/payments">
                   <i class="fas fa-dollar-sign"></i>
                   <b class="px-1">Payments</b>
                 </a>
@@ -84,7 +88,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/expenses">
                   <i class="fas fa-dollar-sign"></i>
                   <b class="px-1">Expenses</b>
                 </a>
@@ -134,5 +138,9 @@
           </main>
         </div>
     </div>
+    <div>
+      @yield('scripts')
+    </div>
+
 </body>
 </html>

@@ -99,7 +99,7 @@
             </select>
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="class">Section</label>
+            <label class="col-sm-2 col-sm-label text-right" for="section">Section</label>
             <select id="section" name="section" class="form-control col-sm-9" required>
                 @foreach($sections as $section)
                     <option>{{$section->name}}</option>
@@ -176,5 +176,6 @@
             <input type="submit" class="btn btn-primary mx-4" value="Submit"/>
         </div>
     </form>
+
 </div>
 @endsection

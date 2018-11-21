@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Student;
+use App\Employee;
+use App\Classes;
+use App\Section;
 
 class HomeController extends Controller
 {
@@ -23,6 +27,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $totalStudent = Student::count();
+        $totalEmployees = Employee::count();
+        $totalClasses = Classes::count();
+        $totalSections = Section::count();
+        return view('home', ['student'=>$totalStudent, 'employee'=>$totalEmployees, 'class'=>$totalClasses, 'section'=>$totalSections]);
     }
 }

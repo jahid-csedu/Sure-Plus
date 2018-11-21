@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-end">
-                        <a class="btn btn-primary btn-sm" href="classes/create">Add New</a>
+                        <a class="btn btn-success btn-sm" href="classes/create">Add New</a>
                     </div>
                     <div class="d-flex justify-content-center">
                         <span class="text-uppercase font-weight-bold">All Classes</span>
@@ -23,7 +23,7 @@
                           <th scope="col">Name</th>
                           <th scope="col">Class</th>
                           <th scope="col">Description</th>
-                          <th scope="col">Action</th>
+                          <th scope="col">Actions</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -37,8 +37,8 @@
                                 <form method="POST" action="{{ route('classes.destroy', $class->id) }}">
                                   @csrf
                                   @method('DELETE')
-                                  <a class="btn btn-info" href="{{ route('classes.edit', $class->id) }}">Edit</a>
-                                  <button type="submit" class="btn btn-danger mx-3">Delete</button>
+                                  <a class="btn btn-info btn-sm" href="{{ route('classes.edit', $class->id) }}">Edit</a>
+                                  <button type="submit" class="btn btn-danger btn-sm mx-3">Delete</button>
                                 </form>
                               </td>
                             </tr>

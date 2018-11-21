@@ -38,8 +38,12 @@ class Student extends Model
     	return $this->belongsTo('App\Section');
     }
 
-    public function result() {
+    public function results() {
         return $this->hasMany('App\Result');
+    }
+
+    public function payments() {
+        return $this->hasMany('App\Payment');
     }
 
 }

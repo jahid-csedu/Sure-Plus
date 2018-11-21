@@ -6,14 +6,10 @@
     <div class="row justify-content-center">
         <div class="col-md-12 col-lg-12 col-sm-auto py-3">
             <div class="card">
-                <div class="card-header">
-                    <div class="d-flex justify-content-end">
-                        <a class="btn btn-primary btn-sm" href="employees/create">Add New</a>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <span class="text-uppercase font-weight-bold">All Employees</span>
-                    </div>
-                </div>
+                <center class="card-header justify-content-center">
+                    <a class="btn btn-success mx-2 pull-left col-md-5" href="employees/create">Add A New Employee</a>
+                    <a class="btn btn-primary mx-2 pull-right col-md-5" href="#">Search An Existing Employee</a>
+                </center>
 
                 <div class="card-body">
                     <table class="table table-striped table-bordered table-hover">
