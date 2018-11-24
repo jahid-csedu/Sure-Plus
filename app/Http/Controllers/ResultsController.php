@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace SurePlus\Http\Controllers;
 
-use App\Result;
-use App\Exam;
-use App\Student;
+use SurePlus\Result;
+use SurePlus\Exam;
+use SurePlus\Student;
 use Illuminate\Http\Request;
 
 class ResultsController extends Controller
@@ -95,7 +95,7 @@ class ResultsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Result  $result
+     * @param  \SurePlus\Result  $result
      * @return \Illuminate\Http\Response
      */
     public function show($examId)
@@ -109,7 +109,7 @@ class ResultsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Result  $result
+     * @param  \SurePlus\Result  $result
      * @return \Illuminate\Http\Response
      */
     public function edit(Result $result)
@@ -121,7 +121,7 @@ class ResultsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Result  $result
+     * @param  \SurePlus\Result  $result
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Result $result)
@@ -132,7 +132,7 @@ class ResultsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Result  $result
+     * @param  \SurePlus\Result  $result
      * @return \Illuminate\Http\Response
      */
     public function destroy(Result $result)

@@ -36,7 +36,7 @@
             <label class="col-sm-2 col-sm-label text-right" for="section">Section</label>
             <select id="section" name="section" class="form-control col-sm-9" required>
                 @foreach($sections as $section)
-                    @if($section->name === $student->section)
+                    @if($section->name === $exam->section)
                         <option selected>{{$section->name}}</option>
                     @else
                         <option>{{$section->name}}</option>

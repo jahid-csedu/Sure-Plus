@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Dhaka',
 
     /*
     |--------------------------------------------------------------------------
@@ -154,11 +154,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        SurePlus\Providers\AppServiceProvider::class,
+        SurePlus\Providers\AuthServiceProvider::class,
+        // SurePlus\Providers\BroadcastServiceProvider::class,
+        SurePlus\Providers\EventServiceProvider::class,
+        SurePlus\Providers\RouteServiceProvider::class,
 
     ],
 

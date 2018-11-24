@@ -30,7 +30,7 @@
             </div>
 
             <div class="col-md-3" style="float:left">
-              <div class="card-counter success">
+              <div class="card-counter info">
                 <i class="fa fa-book"></i>
                 <span class="count-numbers">{{ $section }}</span>
                 <span class="count-name">Batches</span>

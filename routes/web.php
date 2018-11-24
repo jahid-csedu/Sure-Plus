@@ -31,6 +31,12 @@ Route::middleware(['auth'])->group(function () {
 	Route::resource('expenses', 'ExpensesController');
 
 	Route::get('fees','StudentsController@showFees');
+	Route::post('searchFees','StudentsController@searchFees');
+	Route::post('searchStudents','StudentsController@searchStudents');
+	Route::post('searchEmployees','EmployeesController@searchEmployee');
+	Route::post('searchPayments','PaymentsController@searchPayment');
+	Route::post('searchExpenses','ExpensesController@searchExpense');
+	Route::post('searchExams','ExamsController@searchExam');
 	Route::get('showResult','ResultsController@showResult');
 
 });

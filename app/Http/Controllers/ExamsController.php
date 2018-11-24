@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace SurePlus\Http\Controllers;
 
-use App\Exam;
-use App\Classes;
-use App\Section;
+use SurePlus\Exam;
+use SurePlus\Classes;
+use SurePlus\Section;
 use Illuminate\Http\Request;
 
 class ExamsController extends Controller
@@ -17,8 +17,10 @@ class ExamsController extends Controller
     public function index()
     {
         //
+        $classes = Classes::all();
+        $sections = Section::all();
         $exams = Exam::orderBy('date','desc')->get();
-        return view('exams.index', ['exams'=>$exams]);
+        return view('exams.index', ['exams'=>$exams,'classes'=>$classes, 'sections'=>$sections]);
     }
 
     /**
@@ -92,7 +94,7 @@ class ExamsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Exam  $exam
+     * @param  \SurePlus\Exam  $exam
      * @return \Illuminate\Http\Response
      */
     public function show(Exam $exam)
@@ -103,7 +105,7 @@ class ExamsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Exam  $exam
+     * @param  \SurePlus\Exam  $exam
      * @return \Illuminate\Http\Response
      */
     public function edit(Exam $exam)
@@ -111,14 +113,14 @@ class ExamsController extends Controller
         //
         $classes = Classes::all();
         $sections = Section::all();
-        return view('exams.edit', ['classes'=>$classes, 'sections'=>$sections]);
+        return view('exams.edit', ['exam'=>$exam,'classes'=>$classes, 'sections'=>$sections]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Exam  $exam
+     * @param  \SurePlus\Exam  $exam
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Exam $exam)
@@ -143,7 +145,7 @@ class ExamsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Exam  $exam
+     * @param  \SurePlus\Exam  $exam
      * @return \Illuminate\Http\Response
      */
     public function destroy(Exam $exam)
@@ -154,6 +156,48 @@ class ExamsController extends Controller
         }
 
         return back()->withInput()->with('errors','Problem with deleting the exam');
+    }
+
+    public function searchExam(Request $request) {
+        $searchType = $request->searchType;
+        if($searchType==="Search By Class") {
+            $class = $request->class;
+            $section = $request->section;
+            if($section==="All"){
+                $hasExam = Exam::where('class', $class)->get()->first();
+                if($hasExam) {
+                    $exams = Exam::where('class', $class)->get();
+                    $classes = Classes::all();
+                    $sections = Section::all();
+                    return view('exams.index',['exams'=>$exams, 'classes'=>$classes, 'sections'=>$sections]);
+                }else {
+                    return redirect()->route('exams.index')->with('errors','No Exam record found');
+                }
+            }else {
+                $hasExam = Exam::where(['class'=>$class, 'section'=>$section])->get()->first();
+                if($hasExam) {
+                    $exams = Exam::where(['class'=>$class, 'section'=>$section])->get();
+                    $classes = Classes::all();
+                    $sections = Section::all();
+                    return view('exams.index',['exams'=>$exams, 'classes'=>$classes, 'sections'=>$sections]);
+                }else {
+                    return redirect()->route('exams.index')->with('errors','No Exam record found');
+                }
+            }
+        }else if($searchType==="Search By Date") {
+            $fromDate = $request->from_date;
+            $toDate = $request->to_date;
+
+            $hasExam = Exam::whereBetween('date', array($fromDate, $toDate))->first();
+            if($hasExam) {
+                $exams = Exam::whereBetween('date', array($fromDate, $toDate))->orderBy('date')->get();
+                    $classes = Classes::all();
+                    $sections = Section::all();
+                    return view('exams.index',['exams'=>$exams, 'classes'=>$classes, 'sections'=>$sections]);
+            }else {
+                return redirect()->route('exams.index')->with('errors','No Payment Record Found');
+            }
+        }
     }
 
 }

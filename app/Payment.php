@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace SurePlus;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,6 +19,6 @@ class Payment extends Model
     ];
 
     public function student() {
-    	return $this->belongsTo('App\Student');
+    	return $this->belongsTo('SurePlus\Student');
     }
 }

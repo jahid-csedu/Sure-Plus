@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace SurePlus\Http\Controllers;
 
-use App\Expense;
-use App\Account;
+use SurePlus\Expense;
+use SurePlus\Account;
 use Illuminate\Http\Request;
 
 class ExpensesController extends Controller
@@ -60,7 +60,7 @@ class ExpensesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Expense  $expense
+     * @param  \SurePlus\Expense  $expense
      * @return \Illuminate\Http\Response
      */
     public function show(Expense $expense)
@@ -71,7 +71,7 @@ class ExpensesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Expense  $expense
+     * @param  \SurePlus\Expense  $expense
      * @return \Illuminate\Http\Response
      */
     public function edit(Expense $expense)
@@ -83,7 +83,7 @@ class ExpensesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Expense  $expense
+     * @param  \SurePlus\Expense  $expense
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Expense $expense)
@@ -94,11 +94,29 @@ class ExpensesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Expense  $expense
+     * @param  \SurePlus\Expense  $expense
      * @return \Illuminate\Http\Response
      */
     public function destroy(Expense $expense)
     {
         //
+        if($expense->delete()) {
+            return redirect()->route('expenses.index')->with('success','The expense record was deleted successfully');
+        }
+
+        return back()->withInput()->with('errors','Problem with deleting the expense record');
+    }
+
+    public function searchExpense(Request $request) {
+        $fromDate = $request->from_date;
+        $toDate = $request->to_date;
+
+        $hasExpense = Expense::whereBetween('date', array($fromDate, $toDate))->first();
+        if($hasExpense) {
+            $expenses = Expense::whereBetween('date', array($fromDate, $toDate))->orderBy('date')->get();
+            return view('expenses.index',['expenses'=>$expenses]);
+        }else {
+            return redirect()->route('expenses.index')->with('errors','No Expense Record Found');
+        }
     }
 }

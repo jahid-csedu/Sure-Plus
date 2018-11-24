@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace SurePlus\Http\Controllers;
 
-use App\Employee;
+use SurePlus\Employee;
 use Illuminate\Http\Request;
 
 class EmployeesController extends Controller
@@ -85,7 +85,7 @@ class EmployeesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Employee  $employee
+     * @param  \SurePlus\Employee  $employee
      * @return \Illuminate\Http\Response
      */
     public function show(Employee $employee)
@@ -98,7 +98,7 @@ class EmployeesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Employee  $employee
+     * @param  \SurePlus\Employee  $employee
      * @return \Illuminate\Http\Response
      */
     public function edit(Employee $employee)
@@ -112,7 +112,7 @@ class EmployeesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Employee  $employee
+     * @param  \SurePlus\Employee  $employee
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Employee $employee)
@@ -145,7 +145,7 @@ class EmployeesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Employee  $employee
+     * @param  \SurePlus\Employee  $employee
      * @return \Illuminate\Http\Response
      */
     public function destroy(Employee $employee)
@@ -156,5 +156,15 @@ class EmployeesController extends Controller
         }
 
         return back()->withInput()->with('errors','Problem with deleting the employee');
+    }
+
+    public function searchEmployee(Request $request) {
+        $employeeId = $request->employee_id;
+        $employee = Employee::find($employeeId);
+        if($employee) {
+            return redirect()->route('employees.show', $employee);
+        }else {
+            return redirect()->route('employees.index')->with('errors','No Employee found with this ID');
+        }
     }
 }

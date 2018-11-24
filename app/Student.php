@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace SurePlus;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -31,19 +31,19 @@ class Student extends Model
     ];
 
     public function class() {
-    	return $this->belongsTo('App\Classes');
+    	return $this->belongsTo('SurePlus\Classes');
     }
 
     public function section() {
-    	return $this->belongsTo('App\Section');
+    	return $this->belongsTo('SurePlus\Section');
     }
 
     public function results() {
-        return $this->hasMany('App\Result');
+        return $this->hasMany('SurePlus\Result');
     }
 
     public function payments() {
-        return $this->hasMany('App\Payment');
+        return $this->hasMany('SurePlus\Payment');
     }
 
 }

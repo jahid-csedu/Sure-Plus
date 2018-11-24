@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace SurePlus\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Student;
-use App\Employee;
-use App\Classes;
-use App\Section;
+use SurePlus\Student;
+use SurePlus\Employee;
+use SurePlus\Classes;
+use SurePlus\Section;
 
 class HomeController extends Controller
 {

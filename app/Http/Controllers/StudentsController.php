@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace SurePlus\Http\Controllers;
 
-use App\Student;
-use App\Classes;
-use App\Section;
+use SurePlus\Student;
+use SurePlus\Classes;
+use SurePlus\Section;
 use Illuminate\Http\Request;
 
 class StudentsController extends Controller
@@ -18,7 +18,9 @@ class StudentsController extends Controller
     {
         //
         $students = Student::orderBy('class','desc')->get();
-        return view('student.index',['students'=>$students]);
+        $classes = Classes::all();
+        $sections = Section::all();
+        return view('student.index',['students'=>$students, 'classes'=>$classes, 'sections'=>$sections]);
     }
 
     /**
@@ -113,7 +115,7 @@ class StudentsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Student  $student
+     * @param  \SurePlus\Student  $student
      * @return \Illuminate\Http\Response
      */
     public function show(Student $student)
@@ -126,7 +128,7 @@ class StudentsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Student  $student
+     * @param  \SurePlus\Student  $student
      * @return \Illuminate\Http\Response
      */
     public function edit(Student $student)
@@ -141,7 +143,7 @@ class StudentsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Student  $student
+     * @param  \SurePlus\Student  $student
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Student $student)
@@ -187,7 +189,7 @@ class StudentsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Student  $student
+     * @param  \SurePlus\Student  $student
      * @return \Illuminate\Http\Response
      */
     public function destroy(Student $student)
@@ -201,9 +203,96 @@ class StudentsController extends Controller
         return back()->withInput()->with('errors','Problem with deleting the student');
     }
 
-    public function showFees(Student $student) {
+    public function showFees() {
         $students = Student::orderBy('class','desc')->get();
-        return view('fees',['students'=>$students]);
+        $classes = Classes::all();
+        $sections = Section::all();
+        return view('fees.multiple_student_fees',['students'=>$students, 'classes'=>$classes, 'sections'=>$sections]);
+    }
+
+    public function searchFees(Request $request) {
+        $searchType = $request->searchType;
+        if($searchType==="Search By Student ID") {
+            $studentId = $request->student_id;
+            $student = Student::find($studentId);
+            if($student) {
+                $classes = Classes::all();
+                $sections = Section::all();
+                return view('fees.single_student_fees',['student'=>$student, 'classes'=>$classes, 'sections'=>$sections]);
+            }else {
+                $students = Student::orderBy('class','desc')->get();
+                $classes = Classes::all();
+                $sections = Section::all();
+                return view('fees.multiple_student_fees',['students'=>$students, 'classes'=>$classes, 'sections'=>$sections]);
+            }
+        }else if($searchType==="Search By Class") {
+            $class = $request->class;
+            $section = $request->section;
+            if($section==="All") {
+                $hasStudent = Student::where('class', $class)->get()->first();
+                if($hasStudent) {
+                    $students = Student::where('class', $class)->get();
+                    $classes = Classes::all();
+                    $sections = Section::all();
+                    return view('fees.multiple_student_fees',['students'=>$students, 'classes'=>$classes, 'sections'=>$sections]);
+                }else {
+                    $students = Student::orderBy('class','desc')->get();
+                    $classes = Classes::all();
+                    $sections = Section::all();
+                    return view('fees.multiple_student_fees',['students'=>$students, 'classes'=>$classes, 'sections'=>$sections]);
+                }
+            }else {
+                $hasStudent = Student::where(['class'=>$class, 'section'=>$section])->get()->first();
+                if($hasStudent) {
+                    $students = Student::where(['class'=>$class, 'section'=>$section])->get();
+                    $classes = Classes::all();
+                    $sections = Section::all();
+                    return view('fees.multiple_student_fees',['students'=>$students, 'classes'=>$classes, 'sections'=>$sections]);
+                }else {
+                    $students = Student::orderBy('class','desc')->get();
+                    $classes = Classes::all();
+                    $sections = Section::all();
+                    return view('fees.multiple_student_fees',['students'=>$students, 'classes'=>$classes, 'sections'=>$sections]);
+                }
+            }
+        }
+    }
+
+    public function searchStudents(Request $request) {
+        $searchType = $request->searchType;
+        if($searchType==="Search By Student ID") {
+            $studentId = $request->student_id;
+            $student = Student::find($studentId);
+            if($student) {
+                return redirect()->route('students.show', $student);
+            }else {
+                return redirect()->route('students.index')->with('errors','No Student found with this ID');
+            }
+        }else if($searchType==="Search By Class") {
+            $class = $request->class;
+            $section = $request->section;
+            if($section==="All"){
+                $hasStudent = Student::where('class', $class)->get()->first();
+                if($hasStudent) {
+                    $students = Student::where('class', $class)->get();
+                    $classes = Classes::all();
+                    $sections = Section::all();
+                    return view('student.index',['students'=>$students, 'classes'=>$classes, 'sections'=>$sections]);
+                }else {
+                    return redirect()->route('students.index')->with('errors','No Student found');
+                }
+            }else {
+                $hasStudent = Student::where(['class'=>$class, 'section'=>$section])->get()->first();
+                if($hasStudent) {
+                    $students = Student::where(['class'=>$class, 'section'=>$section])->get();
+                    $classes = Classes::all();
+                    $sections = Section::all();
+                    return view('student.index',['students'=>$students, 'classes'=>$classes, 'sections'=>$sections]);
+                }else {
+                    return redirect()->route('students.index')->with('errors','No Student found');
+                }
+            }
+        }
     }
 
 }
