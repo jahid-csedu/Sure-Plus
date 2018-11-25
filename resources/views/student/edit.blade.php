@@ -309,3 +309,24 @@
     </form>
 </div>
 @endsection
+@section('scripts')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+            });
+            $('#class').change(function() {
+                $.ajax({
+                   type:'GET',
+                   url:'/getSections',
+                   data:{class:this.value},
+                   success:function(data){
+                      document.getElementById('section').innerHTML=data;
+                   }
+                });
+            });
+        });
+    </script>
+@endsection

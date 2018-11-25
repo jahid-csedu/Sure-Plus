@@ -101,9 +101,7 @@
         <div class="form-group row">
             <label class="col-sm-2 col-sm-label text-right" for="section">Section</label>
             <select id="section" name="section" class="form-control col-sm-9" required>
-                @foreach($sections as $section)
-                    <option>{{$section->name}}</option>
-                @endforeach
+                
             </select>
         </div>
         <div class="form-group row">
@@ -178,4 +176,33 @@
     </form>
 
 </div>
+@endsection
+@section('scripts')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+            });
+            $.ajax({
+               type:'GET',
+               url:'/getSections',
+               data:{class:$('#class').val()},
+               success:function(data){
+                  document.getElementById('section').innerHTML=data;
+               }
+            });
+            $('#class').change(function() {
+                $.ajax({
+                   type:'GET',
+                   url:'/getSections',
+                   data:{class:this.value},
+                   success:function(data){
+                      document.getElementById('section').innerHTML=data;
+                   }
+                });
+            });
+        });
+    </script>
 @endsection

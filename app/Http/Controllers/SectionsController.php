@@ -139,4 +139,16 @@ class SectionsController extends Controller
 
         return back()->with('errors','Problem with deleting the section');
     }
+
+    public function getSections(Request $request) {
+        if($request->ajax()) {
+            $class = $request->class;
+            $sections = Section::where('class', $class)->get();
+            $options = "";
+            foreach($sections as $section) {
+                $options .= "<option>".$section->name."</option>";
+            }
+            return $options;
+        }
+    }
 }

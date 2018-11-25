@@ -32,8 +32,7 @@ class StudentsController extends Controller
     {
         //
         $classes = Classes::all();
-        $sections = Section::all();
-        return view('student.create',['classes'=>$classes, 'sections'=>$sections]);
+        return view('student.create',['classes'=>$classes]);
     }
 
     /**

@@ -127,6 +127,30 @@
               $('.searchByClassDiv').slideDown();
             }
         });
+        //Ajax Call
+        $.ajaxSetup({
+              headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+            });
+            $.ajax({
+               type:'GET',
+               url:'/getSections',
+               data:{class:$('#class').val()},
+               success:function(data){
+                  $('#section').append=data;
+               }
+            });
+            $('#class').change(function() {
+                $.ajax({
+                   type:'GET',
+                   url:'/getSections',
+                   data:{class:this.value},
+                   success:function(data){
+                      $('#section').append=data;
+                   }
+                });
+            });
       });
   </script>
 @endsection
