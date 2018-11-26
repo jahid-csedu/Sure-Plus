@@ -8,7 +8,6 @@ class Classes extends Model
 {
     //
     protected $fillable = [
-    	'name',
     	'class',
     	'description'
     ];
@@ -18,7 +17,7 @@ class Classes extends Model
     }
 
     public function sections() {
-    	return $this->belongsToMany('SurePlus\Section');
+    	return $this->hasMany('SurePlus\Section');
     }
 
     public function exams() {

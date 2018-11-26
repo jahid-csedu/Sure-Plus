@@ -15,8 +15,7 @@
                       <thead>
                         <tr>
                           <th scope="col">Sl No.</th>
-                          <th scope="col">Name</th>
-                          <th scope="col">Class</th>
+                          <th scope="col">Class Name</th>
                           <th scope="col">Description</th>
                           <th scope="col">Actions</th>
                         </tr>
@@ -25,7 +24,6 @@
                         @foreach($classes as $serial=>$class)
                             <tr>
                               <th scope="row">{{ $serial+1 }}</th>
-                              <td>{{ $class->name }}</td>
                               <td>{{ $class->class }}</td>
                               <td>{{ $class->description }}</td>
                               <td>

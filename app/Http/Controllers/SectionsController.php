@@ -51,6 +51,12 @@ class SectionsController extends Controller
     {
         //
         if(Auth::check()) {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'class' => 'required|string',
+                'shift' => 'required',
+                'description' => 'nullable'
+            ]);
             $section = new Section();
             $section->name = $request->name;
             $section->class = $request->class;
@@ -106,6 +112,12 @@ class SectionsController extends Controller
     public function update(Request $request, Section $section)
     {
         //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'class' => 'required|integer',
+            'shift' => 'required',
+            'description' => 'nullable'
+        ]);
         $section = Section::find($section->id);
         $section->name = $request->name;
         $section->class = $request->class;

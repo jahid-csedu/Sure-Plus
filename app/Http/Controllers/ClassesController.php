@@ -50,8 +50,11 @@ class ClassesController extends Controller
     {
         //
         if(Auth::check()) {
+            $request->validate([
+                'class' => 'required|string|max:255',
+                'description' => 'nullable'
+            ]);
             $classes = new Classes();
-            $classes->name = $request->input('name');
             $classes->class = $request->input('class');
             $classes->description = $request->input('description');
 
@@ -104,8 +107,12 @@ class ClassesController extends Controller
     public function update(Request $request, Classes $class)
     {
         //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'class' => 'required|integer',
+            'description' => 'nullable'
+        ]);
         $class = Classes::find($class->id);
-        $class->name = $request->name;
         $class->class = $request->class;
         $class->description = $request->description;
 

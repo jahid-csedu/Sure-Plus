@@ -15,7 +15,7 @@ class Section extends Model
     ];
 
     public function classes() {
-    	return $this->belongsToMany('SurePlus\Classes');
+    	return $this->belongsTo('SurePlus\Classes');
     }
 
     public function students() {

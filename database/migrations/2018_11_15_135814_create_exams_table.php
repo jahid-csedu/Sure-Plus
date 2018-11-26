@@ -22,8 +22,6 @@ class CreateExamsTable extends Migration
             $table->integer('total_marks')->unsigned();
             $table->date('date');
             $table->timestamps();
-
-            $table->foreign('class')->references('class')->on('classes');
         });
     }
 

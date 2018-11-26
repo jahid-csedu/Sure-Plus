@@ -32,6 +32,8 @@
                           <th scope="col">Student ID</th>
                           <th scope="col">Student Name</th>
                           <th scope="col">Obtained Marks</th>
+                          <th scope="col">Percentile Marks</th>
+                          <th scope="col">Highest Marks</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -41,6 +43,8 @@
                               <td>{{ $result->student_id }}</td>
                               <td>{{ $result->student->name }}</td>
                               <td>{{ $result->marks }}</td>
+                              <td>{{ number_format(($result->marks/$exam->total_marks)*100, 2)."%" }}</td>
+                              <td>{{ $highest }}</td>
                             </tr>
                         @endforeach
                       </tbody>

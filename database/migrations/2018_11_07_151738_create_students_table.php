@@ -23,7 +23,7 @@ class CreateStudentsTable extends Migration
             $table->string('personal_phone',11)->nullable();
             $table->string('father_phone',11)->nullable();
             $table->string('mother_phone',11)->nullable();
-            $table->integer('class')->unsigned();
+            $table->string('class');
             $table->string('section')->nullable();
             $table->string('group')->nullable();
             $table->string('institute')->nullable();
@@ -32,9 +32,6 @@ class CreateStudentsTable extends Migration
             $table->integer('monthly_fee')->unsigned()->default(0);
             $table->binary('photo')->nullable();
             $table->timestamps();
-
-            $table->foreign('class')->references('id')->on('classes');
-            $table->foreign('section')->references('id')->on('sections');
         });
     }
 
