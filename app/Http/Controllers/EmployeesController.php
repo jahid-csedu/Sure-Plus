@@ -46,9 +46,7 @@ class EmployeesController extends Controller
             'permanent_address' => 'required|string|max:255',
             'phone' => 'required|string|max:11',
             'designation' => 'required|string|max:255',
-            'dob' => 'nullable|date',
-            'blood_group' => 'nullable|in:A+, A-, B+, B-, AB+, AB-, O+, O-',
-            'photo' => 'nullable|mimes:jpeg,jpg,png|max:1000'
+            'dob' => 'nullable|date'
         ]);
         $employee = new Employee();
         $employee->name = $request->name;
@@ -134,9 +132,7 @@ class EmployeesController extends Controller
             'permanent_address' => 'required|string|max:255',
             'phone' => 'required|string|max:11',
             'designation' => 'required|string|max:255',
-            'dob' => 'nullable|date',
-            'blood_group' => 'nullable|in:A+, A-, B+, B-, AB+, AB-, O+, O-',
-            'photo' => 'nullable|mimes:jpeg,jpg,png|max:1000'
+            'dob' => 'nullable|date'
         ]);
         $employee = Employee::find($employee->id);
         $employee->name = $request->name;
@@ -149,7 +145,7 @@ class EmployeesController extends Controller
 
         //Uploading Photo
         if($request->hasFile('photo')) {
-            $request->file('photo')->storeAs('public/photos',$id);
+            $request->file('photo')->storeAs('public/photos',$employee->id);
             $employee->photo = $employee->id;
         }
 

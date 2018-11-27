@@ -55,12 +55,9 @@ class StudentsController extends Controller
             'mother_phone' => 'nullable|string|max:11',
             'class' => 'required|string|max:255',
             'section' => 'required|string|max:255',
-            'group' => 'nullable|in:Science, Business Studies, Humanities',
             'institute' => 'required|string|max:255',
             'dob' => 'nullable|date',
-            'blood_group' => 'nullable|in:A+, A-, B+, B-, AB+, AB-, O+, O-',
-            'fee' => 'required|integer',
-            'photo' => 'nullable|mimes:jpeg,jpg,png|max:1000'
+            'fee' => 'required|integer'
         ]);
 
         $student = new Student();
@@ -175,12 +172,9 @@ class StudentsController extends Controller
             'mother_phone' => 'nullable|string|max:11',
             'class' => 'required|string|max:255',
             'section' => 'required|string|max:255',
-            'group' => 'nullable|in:Science, Business Studies, Humanities',
             'institute' => 'required|string|max:255',
             'dob' => 'nullable|date',
-            'blood_group' => 'nullable|in:A+, A-, B+, B-, AB+, AB-, O+, O-',
-            'fee' => 'required|integer',
-            'photo' => 'nullable|mimes:jpeg,jpg,png|max:1000'
+            'fee' => 'required|integer'
         ]);
 
         $student = Student::find($student->id);
