@@ -44,9 +44,23 @@ class StudentsController extends Controller
     public function store(Request $request)
     {
         //
-
         $request->validate([
-            'photo'=>'image|nullable|max:2048'
+            's_name' => 'required|string|max:255',
+            'f_name' => 'required|string|max:255',
+            'm_name' => 'required|string|max:255',
+            'pres_address' => 'nullable|string|max:255',
+            'perm_address' => 'nullable|string|max:255',
+            'personal_phone' => 'nullable|string|max:11',
+            'father_phone' => 'nullable|string|max:11',
+            'mother_phone' => 'nullable|string|max:11',
+            'class' => 'required|string|max:255',
+            'section' => 'required|string|max:255',
+            'group' => 'nullable|in:Science, Business Studies, Humanities',
+            'institute' => 'required|string|max:255',
+            'dob' => 'nullable|date',
+            'blood_group' => 'nullable|in:A+, A-, B+, B-, AB+, AB-, O+, O-',
+            'fee' => 'required|integer',
+            'photo' => 'nullable|mimes:jpeg,jpg,png|max:1000'
         ]);
 
         $student = new Student();
@@ -67,30 +81,32 @@ class StudentsController extends Controller
         $student->monthly_fee = $request->fee;
 
         //generating the Student ID
+        $classObject = Classes::where('name',$request->class)->first();
+        $class = $classObject->class;
         $lastStudent = Student::where('class',$request->class)->orderBy('created_at','desc')->first();
         $id=null;
         if($lastStudent) {//if previous student exists of this class
             $lastId = $lastStudent->id;
             $idSerial = (int)substr($lastId, 8)+1;
             if($idSerial<10) {
-                if($request->class <10) {
-                    $id = '10'.date('Y').'0'.$request->class.'0'.$idSerial;
+                if($class <10) {
+                    $id = '10'.date('Y').'0'.$class.'0'.$idSerial;
                 }else {
-                    $id = '10'.date('Y').$request->class.'0'.$idSerial;
+                    $id = '10'.date('Y').$class.'0'.$idSerial;
                 }
             }else {
-                if($request->class <10) {
-                    $id = '10'.date('Y').'0'.$request->class.$idSerial;
+                if($class <10) {
+                    $id = '10'.date('Y').'0'.$class.$idSerial;
                 }else {
-                    $id = '10'.date('Y').$request->class.$idSerial;
+                    $id = '10'.date('Y').$class.$idSerial;
                 }
             }
         }else {//if no previous student exists of this class
             $idSerial = 1;
-            if($request->class <10) {
-                $id = '10'.date('Y').'0'.$request->class.'0'.$idSerial;
+            if($class <10) {
+                $id = '10'.date('Y').'0'.$class.'0'.$idSerial;
             }else {
-                $id = '10'.date('Y').$request->class.'0'.$idSerial;
+                $id = '10'.date('Y').$class.'0'.$idSerial;
             }
         }
 
@@ -148,9 +164,23 @@ class StudentsController extends Controller
     public function update(Request $request, Student $student)
     {
         //
-
         $request->validate([
-            'photo'=>'image|nullable|max:2048'
+            's_name' => 'required|string|max:255',
+            'f_name' => 'required|string|max:255',
+            'm_name' => 'required|string|max:255',
+            'pres_address' => 'nullable|string|max:255',
+            'perm_address' => 'nullable|string|max:255',
+            'personal_phone' => 'nullable|string|max:11',
+            'father_phone' => 'nullable|string|max:11',
+            'mother_phone' => 'nullable|string|max:11',
+            'class' => 'required|string|max:255',
+            'section' => 'required|string|max:255',
+            'group' => 'nullable|in:Science, Business Studies, Humanities',
+            'institute' => 'required|string|max:255',
+            'dob' => 'nullable|date',
+            'blood_group' => 'nullable|in:A+, A-, B+, B-, AB+, AB-, O+, O-',
+            'fee' => 'required|integer',
+            'photo' => 'nullable|mimes:jpeg,jpg,png|max:1000'
         ]);
 
         $student = Student::find($student->id);

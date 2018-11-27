@@ -40,6 +40,12 @@ class ExpensesController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'description' => 'required|string|max:255',
+            'amount' => 'required|integer',
+            'date' => 'required|date',
+        ]);
+
         $expense = new Expense();
         $expense->description = $request->description;
         $expense->amount = $request->amount;
@@ -51,7 +57,7 @@ class ExpensesController extends Controller
             $account->credit = 0;
             $account->date = $request->date;
             $account->save();
-            return redirect()->route('expenses.create')->with('success', 'The information added successfully');
+            return redirect()->route('expenses.index')->with('success', 'The information added successfully');
         }else {
             return redirect()->back()->withInput()->with('errors', 'Problem with adding the information, Please try again');
         }

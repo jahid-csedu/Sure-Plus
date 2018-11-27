@@ -22,7 +22,7 @@
             <label class="col-sm-2 col-sm-label text-right" for="class">Class<span class="required text-danger">*</span></label>
             <select id="class" name="class" class="form-control col-sm-9" required>
                 @foreach($classes as $class)
-                    <option>{{$class->class}}</option>
+                    <option>{{$class->name}}</option>
                 @endforeach
             </select>
         </div>
@@ -85,7 +85,7 @@
                url:'/getSections',
                data:{class:$('#class').val()},
                success:function(data){
-                  document.getElementById('section').innerHTML=data;
+                  document.getElementById('section').innerHTML="<option>All</option>"+data;
                }
             });
             $('#class').change(function() {
@@ -94,7 +94,7 @@
                    url:'/getSections',
                    data:{class:this.value},
                    success:function(data){
-                      document.getElementById('section').innerHTML=data;
+                      document.getElementById('section').innerHTML="<option>All</option>"+data;
                    }
                 });
             });

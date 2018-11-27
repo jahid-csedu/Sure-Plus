@@ -8,6 +8,7 @@ class Classes extends Model
 {
     //
     protected $fillable = [
+        'name',
     	'class',
     	'description'
     ];

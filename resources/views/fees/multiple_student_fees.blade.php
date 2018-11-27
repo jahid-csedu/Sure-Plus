@@ -75,7 +75,7 @@
                           <label class="col-sm-2 col-sm-label text-right" for="class">Class</label>
                           <select id="class" name="class" class="form-control col-sm-9" required>
                               @foreach($classes as $class)
-                                  <option>{{$class->class}}</option>
+                                  <option>{{$class->name}}</option>
                               @endforeach
                           </select>
                       </div>

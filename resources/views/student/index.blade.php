@@ -78,7 +78,7 @@
                       <label class="col-sm-2 col-sm-label text-right" for="class">Class</label>
                       <select id="class" name="class" class="form-control col-sm-9" required>
                           @foreach($classes as $class)
-                              <option>{{$class->class}}</option>
+                              <option>{{$class->name}}</option>
                           @endforeach
                       </select>
                   </div>
@@ -129,28 +129,28 @@
         });
         //Ajax Call
         $.ajaxSetup({
-              headers: {
-                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-              }
-            });
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+        $.ajax({
+           type:'GET',
+           url:'/getSections',
+           data:{class:$('#class').val()},
+           success:function(data){
+              $('#section').append=data;
+           }
+        });
+        $('#class').change(function() {
             $.ajax({
                type:'GET',
                url:'/getSections',
-               data:{class:$('#class').val()},
+               data:{class:this.value},
                success:function(data){
                   $('#section').append=data;
                }
             });
-            $('#class').change(function() {
-                $.ajax({
-                   type:'GET',
-                   url:'/getSections',
-                   data:{class:this.value},
-                   success:function(data){
-                      $('#section').append=data;
-                   }
-                });
-            });
+        });
       });
   </script>
 @endsection

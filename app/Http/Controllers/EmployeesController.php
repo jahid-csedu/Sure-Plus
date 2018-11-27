@@ -40,6 +40,16 @@ class EmployeesController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'present_address' => 'required|string|max:255',
+            'permanent_address' => 'required|string|max:255',
+            'phone' => 'required|string|max:11',
+            'designation' => 'required|string|max:255',
+            'dob' => 'nullable|date',
+            'blood_group' => 'nullable|in:A+, A-, B+, B-, AB+, AB-, O+, O-',
+            'photo' => 'nullable|mimes:jpeg,jpg,png|max:1000'
+        ]);
         $employee = new Employee();
         $employee->name = $request->name;
         $employee->present_address = $request->present_address;
@@ -118,6 +128,16 @@ class EmployeesController extends Controller
     public function update(Request $request, Employee $employee)
     {
         //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'present_address' => 'required|string|max:255',
+            'permanent_address' => 'required|string|max:255',
+            'phone' => 'required|string|max:11',
+            'designation' => 'required|string|max:255',
+            'dob' => 'nullable|date',
+            'blood_group' => 'nullable|in:A+, A-, B+, B-, AB+, AB-, O+, O-',
+            'photo' => 'nullable|mimes:jpeg,jpg,png|max:1000'
+        ]);
         $employee = Employee::find($employee->id);
         $employee->name = $request->name;
         $employee->present_address = $request->present_address;

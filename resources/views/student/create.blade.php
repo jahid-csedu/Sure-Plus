@@ -94,20 +94,20 @@
             <label class="col-sm-2 col-sm-label text-right" for="class">Class<span class="required text-danger">*</span></label>
             <select id="class" name="class" class="form-control col-sm-9" required>
                 @foreach($classes as $class)
-                    <option>{{$class->class}}</option>
+                    <option>{{$class->name}}</option>
                 @endforeach
             </select>
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-sm-label text-right" for="section">Section</label>
             <select id="section" name="section" class="form-control col-sm-9" required>
-                
+               <option value="">Section</option> 
             </select>
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-sm-label text-right" for="group">Group</label>
             <select id="group" name="group" class="form-control col-sm-9">
-                <option>N/A</option>
+                <option value="">N/A</option>
                 <option>Science</option>
                 <option>Business Studies</option>
                 <option>Humanities</option>
@@ -136,7 +136,7 @@
         <div class="form-group row">
             <label class="col-sm-2 col-sm-label text-right" for="blood_group">Blood Group</label>
             <select id="blood_group" name="blood_group" class="form-control col-sm-9">
-                <option>N/A</option>
+                <option value="">N/A</option>
                 <option>A+</option>
                 <option>A-</option>
                 <option>B+</option>
@@ -199,7 +199,7 @@
                    url:'/getSections',
                    data:{class:this.value},
                    success:function(data){
-                      document.getElementById('section').innerHTML=data;
+                       document.getElementById('section').innerHTML=data;
                    }
                 });
             });

@@ -45,6 +45,15 @@ class ExamsController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'class' => 'required|string|max:255',
+            'section' => 'required|string|max:255',
+            'subject' => 'required|string|max:255',
+            'date' => 'required|date',
+            'total_marks' => 'required|integer'
+        ]);
+
         $exam = new Exam();
         $exam->name = $request->name;
         $exam->class = $request->class;
@@ -54,6 +63,8 @@ class ExamsController extends Controller
         $exam->total_marks = $request->total_marks;
 
         //Generating the Exam ID
+        $classObject = Classes::where('name',$request->class)->first();
+        $class = $classObject->class;
         $lastExam = Exam::where('class',$request->class)->orderBy('created_at','desc')->first();
         $id=null;
         if($lastExam) {//if previous student exists of this class
@@ -61,23 +72,23 @@ class ExamsController extends Controller
             $idSerial = (int)substr($lastId, 8)+1;
             if($idSerial<10) {
                 if($request->class <10) {
-                    $id = '20'.date('Y').'0'.$request->class.'0'.$idSerial;
+                    $id = '20'.date('Y').'0'.$class.'0'.$idSerial;
                 }else {
-                    $id = '20'.date('Y').$request->class.'0'.$idSerial;
+                    $id = '20'.date('Y').$class.'0'.$idSerial;
                 }
             }else {
                 if($request->class <10) {
-                    $id = '20'.date('Y').'0'.$request->class.$idSerial;
+                    $id = '20'.date('Y').'0'.$class.$idSerial;
                 }else {
-                    $id = '20'.date('Y').$request->class.$idSerial;
+                    $id = '20'.date('Y').$class.$idSerial;
                 }
             }
         }else {//if no previous student exists of this class
             $idSerial = 1;
             if($request->class <10) {
-                $id = '20'.date('Y').'0'.$request->class.'0'.$idSerial;
+                $id = '20'.date('Y').'0'.$class.'0'.$idSerial;
             }else {
-                $id = '20'.date('Y').$request->class.'0'.$idSerial;
+                $id = '20'.date('Y').$class.'0'.$idSerial;
             }
         }
 
@@ -126,6 +137,15 @@ class ExamsController extends Controller
     public function update(Request $request, Exam $exam)
     {
         //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'class' => 'required|string|max:255',
+            'section' => 'required|string|max:255',
+            'subject' => 'required|string|max:255',
+            'date' => 'required|date',
+            'total_marks' => 'required|integer'
+        ]);
+        
         $exam = Exam::find($exam->id);
         $exam->name = $request->name;
         $exam->class = $request->class;

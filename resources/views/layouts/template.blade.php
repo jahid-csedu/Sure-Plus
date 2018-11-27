@@ -70,12 +70,6 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/payments">
-                  <i class="fas fa-dollar-sign"></i>
-                  <b class="px-1">Payments</b>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" href="/exams">
                   <i class="fas fa-pen"></i>
                   <b class="px-1">Exams</b>
@@ -88,9 +82,21 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/expenses">
+                <a class="nav-link" href="/payments">
                   <i class="fas fa-dollar-sign"></i>
+                  <b class="px-1">Payments</b>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/expenses">
+                  <i class="fas fa-money-bill"></i>
                   <b class="px-1">Expenses</b>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/accounts">
+                  <i class="fas fa-money-check"></i>
+                  <b class="px-1">Accounts</b>
                 </a>
               </li>
               <li class="nav-item">

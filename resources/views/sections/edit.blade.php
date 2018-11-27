@@ -24,10 +24,10 @@
             <label class="col-sm-2 col-sm-label text-right" for="class">Class<span class="required text-danger">*</span></label>
             <select id="class" name="class" class="form-control col-sm-9" required>
                 @foreach($classes as $class)
-                    @if($class->class === $section->class)
-                        <option selected>{{$class->class}}</option>
+                    @if($class->name === $section->class)
+                        <option selected>{{$class->name}}</option>
                     @else
-                        <option>{{$class->class}}</option>
+                        <option>{{$class->name}}</option>
                     @endif
                 @endforeach
             </select>

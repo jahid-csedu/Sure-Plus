@@ -114,7 +114,7 @@ class SectionsController extends Controller
         //
         $request->validate([
             'name' => 'required|string|max:255',
-            'class' => 'required|integer',
+            'class' => 'required|string',
             'shift' => 'required',
             'description' => 'nullable'
         ]);

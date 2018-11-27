@@ -41,6 +41,14 @@ class PaymentsController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'student_id' => 'required|string|max:255',
+            'type' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
+            'amount' => 'required|integer',
+            'date' => 'required|date'
+        ]);
+
         $studentId = $request->student_id;
         if(Student::find($studentId)) {
             $payment = new Payment();

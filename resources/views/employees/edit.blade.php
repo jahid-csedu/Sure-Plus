@@ -80,7 +80,7 @@
             <select id="blood_group" name="blood_group" class="form-control col-sm-9">
                 @switch($employee->blood_group)
                     @case("A+")
-                        <option>N/A</option>
+                        <option value="">N/A</option>
                         <option selected>A+</option>
                         <option>A-</option>
                         <option>B+</option>
@@ -91,7 +91,7 @@
                         <option>O-</option>
                     @break
                     @case("A-")
-                        <option>N/A</option>
+                        <option value="">N/A</option>
                         <option>A+</option>
                         <option selected>A-</option>
                         <option>B+</option>
@@ -102,7 +102,7 @@
                         <option>O-</option>
                     @break
                     @case("B+")
-                        <option>N/A</option>
+                        <option value="">N/A</option>
                         <option>A+</option>
                         <option>A-</option>
                         <option selected>B+</option>
@@ -113,7 +113,7 @@
                         <option>O-</option>
                     @break
                     @case("B-")
-                        <option>N/A</option>
+                        <option value="">N/A</option>
                         <option>A+</option>
                         <option>A-</option>
                         <option>B+</option>
@@ -124,7 +124,7 @@
                         <option>O-</option>
                     @break
                     @case("AB+")
-                        <option>N/A</option>
+                        <option value="">N/A</option>
                         <option>A+</option>
                         <option>A-</option>
                         <option>B+</option>
@@ -135,7 +135,7 @@
                         <option>O-</option>
                     @break
                     @case("AB-")
-                        <option>N/A</option>
+                        <option value="">N/A</option>
                         <option>A+</option>
                         <option>A-</option>
                         <option>B+</option>
@@ -146,7 +146,7 @@
                         <option>O-</option>
                     @break
                     @case("O+")
-                        <option>N/A</option>
+                        <option value="">N/A</option>
                         <option>A+</option>
                         <option>A-</option>
                         <option>B+</option>
@@ -156,8 +156,8 @@
                         <option selected>O+</option>
                         <option>O-</option>
                     @break
-                    @case("A+")
-                        <option>N/A</option>
+                    @case("O-")
+                        <option value="">N/A</option>
                         <option>A+</option>
                         <option>A-</option>
                         <option>B+</option>
@@ -168,7 +168,7 @@
                         <option selected>O-</option>
                     @break
                     @default
-                        <option>N/A</option>
+                        <option value="">N/A</option>
                         <option>A+</option>
                         <option>A-</option>
                         <option>B+</option>

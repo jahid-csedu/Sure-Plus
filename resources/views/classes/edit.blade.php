@@ -10,10 +10,22 @@
         @csrf
         @method('PUT')
         <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="class">Class Name<span class="required">*</span></label>
+            <label class="col-sm-2 col-sm-label text-right" for="name">Class Name<span class="required">*</span></label>
             <input placeholder="Enter Class"
-                id="class"
+                id="name"
+                value="{{ $class->name }}" 
+                required
+                name="name"
+                spellcheck="false"
+                class="form-control col-sm-9"
+                />
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-sm-label text-right" for="class">Class<span class="required text-danger">*</span></label>
+           <input placeholder="Enter Class"
+                type="number" 
                 value="{{ $class->class }}" 
+                id="class"
                 required
                 name="class"
                 spellcheck="false"

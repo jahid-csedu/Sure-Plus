@@ -51,14 +51,16 @@ class ClassesController extends Controller
         //
         if(Auth::check()) {
             $request->validate([
-                'class' => 'required|string|max:255',
+                'name' => 'required|string|max:255',
+                'class' => 'required|integer',
                 'description' => 'nullable'
             ]);
-            $classes = new Classes();
-            $classes->class = $request->input('class');
-            $classes->description = $request->input('description');
+            $class = new Classes();
+            $class->name = $request->name;
+            $class->class = $request->class;
+            $class->description = $request->description;
 
-            if($classes->save()) {
+            if($class->save()) {
                 $allClasses = Classes::all();
                 return redirect()
                     ->route('classes.index',['classes' => $allClasses])
@@ -113,6 +115,7 @@ class ClassesController extends Controller
             'description' => 'nullable'
         ]);
         $class = Classes::find($class->id);
+        $class->name = $request->name;
         $class->class = $request->class;
         $class->description = $request->description;
 

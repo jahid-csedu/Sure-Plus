@@ -9,8 +9,19 @@
     <form method="post" action="{{ route('classes.store') }}">
         @csrf
         <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="class">Class Name<span class="required text-danger">*</span></label>
+            <label class="col-sm-2 col-sm-label text-right" for="name">Class Name<span class="required text-danger">*</span></label>
            <input placeholder="Enter Name"
+                id="name"
+                required
+                name="name"
+                spellcheck="false"
+                class="form-control col-sm-9"
+                />
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-sm-label text-right" for="class">Class<span class="required text-danger">*</span></label>
+           <input placeholder="Enter Class"
+                type="number" 
                 id="class"
                 required
                 name="class"

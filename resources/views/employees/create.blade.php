@@ -74,7 +74,7 @@
         <div class="form-group row">
             <label class="col-sm-2 col-sm-label text-right" for="blood_group">Blood Group</label>
             <select id="blood_group" name="blood_group" class="form-control col-sm-9">
-                <option>N/A</option>
+                <option value="">N/A</option>
                 <option>A+</option>
                 <option>A-</option>
                 <option>B+</option>
