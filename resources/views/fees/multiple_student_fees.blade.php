@@ -14,7 +14,6 @@
                     <table class="table table-striped table-bordered table-hover">
                       <thead>
                         <tr>
-                          <th scope="col">Sl No.</th>
                           <th scope="col">Student ID</th>
                           <th scope="col">Name</th>
                           <th scope="col">Class</th>
@@ -24,7 +23,6 @@
                       <tbody>
                         @foreach($students as $serial=>$student)
                             <tr>
-                              <th scope="row">{{ $serial+1 }}</th>
                               <td>{{ $student->id }}</td>
                               <td>{{ $student->name }}</td>
                               <td>{{ $student->class }}</td>

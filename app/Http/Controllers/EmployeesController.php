@@ -44,8 +44,9 @@ class EmployeesController extends Controller
             'name' => 'required|string|max:255',
             'present_address' => 'required|string|max:255',
             'permanent_address' => 'required|string|max:255',
-            'phone' => 'required|string|max:11',
+            'phone' => 'required|regex:/(01)[0-9]{9}/',
             'designation' => 'required|string|max:255',
+            'blood_group' => ['nullable', 'regex:/(A|B|AB|O)[+-]/'],
             'dob' => 'nullable|date'
         ]);
         $employee = new Employee();
@@ -130,8 +131,9 @@ class EmployeesController extends Controller
             'name' => 'required|string|max:255',
             'present_address' => 'required|string|max:255',
             'permanent_address' => 'required|string|max:255',
-            'phone' => 'required|string|max:11',
+            'phone' => 'required|regex:/(01)[0-9]{9}/',
             'designation' => 'required|string|max:255',
+            'blood_group' => ['nullable', 'regex:/(A|B|AB|O)[+-]/'],
             'dob' => 'nullable|date'
         ]);
         $employee = Employee::find($employee->id);

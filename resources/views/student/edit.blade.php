@@ -8,46 +8,48 @@
     <hr>
     <form method="post" action="/students/{{ $student->id }}" enctype="multipart/form-data">
         @csrf
+        <center><h2 class="text-primary">Personal Information</h2></center>
+        <hr>
         <input type="hidden" name="_method" value="put">
         <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="s_name">Student's Name<span class="required text-danger">*</span></label>
+            <label class="col-sm-2 col-sm-label text-right" for="name">Student's Name<span class="required text-danger">*</span></label>
            <input placeholder="Enter Student's Name"
                 value="{{ $student->name }}" 
-                id="s_name"
+                id="name"
                 required
-                name="s_name"
+                name="name"
                 spellcheck="false"
                 class="form-control col-sm-9"
                 />
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="f_name">Father's Name<span class="required text-danger">*</span></label>
+            <label class="col-sm-2 col-sm-label text-right" for="father_name">Father's Name<span class="required text-danger">*</span></label>
            <input placeholder="Enter Father's Name"
                 value="{{ $student->father_name }}" 
-                id="f_name"
+                id="father_name"
                 required
-                name="f_name"
+                name="father_name"
                 spellcheck="false"
                 class="form-control col-sm-9"
                 />
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="m_name">Mother's Name<span class="required text-danger">*</span></label>
+            <label class="col-sm-2 col-sm-label text-right" for="mother_name">Mother's Name<span class="required text-danger">*</span></label>
            <input placeholder="Enter Mother's Name"
                 value="{{ $student->mother_name }}" 
-                id="m_name"
+                id="mother_name"
                 required
-                name="m_name"
+                name="mother_name"
                 spellcheck="false"
                 class="form-control col-sm-9"
                 />
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="pres_address">Present Address</label>
+            <label class="col-sm-2 col-sm-label text-right" for="present_address">Present Address</label>
            <textarea placeholder="Enter Present Address"
                 value="{{ $student->present_address }}" 
-                id="pres_address"
-                name="pres_address"
+                id="present_address"
+                name="present_address"
                 rows="4"
                 style="resize: vertical;" 
                 spellcheck="false"
@@ -55,114 +57,16 @@
                 ></textarea>
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="perm_address">Permanent Address</label>
+            <label class="col-sm-2 col-sm-label text-right" for="permanent_address">Permanent Address</label>
            <textarea placeholder="Enter Permanent Address"
                 value="{{ $student->permanent_address }}" 
-                id="perm_address"
-                name="perm_address"
+                id="permanent_address"
+                name="permanent_address"
                 rows="4"
                 style="resize: vertical;" 
                 spellcheck="false"
                 class="form-control col-sm-9"
                 ></textarea>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="s_phone">Student's Phone Number</label>
-           <input placeholder="Enter Phone Number"
-                value="{{ $student->personal_phone }}" 
-                type="phone" 
-                id="s_phone"
-                name="s_phone"
-                spellcheck="false"
-                class="form-control col-sm-9"
-                />
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="f_phone">Father's Phone Number</label>
-           <input placeholder="Enter Phone Number"
-                value="{{ $student->father_phone }}" 
-                type="phone" 
-                id="f_phone"
-                name="f_phone"
-                spellcheck="false"
-                class="form-control col-sm-9"
-                />
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="m_phone">Mother's Phone Number</label>
-           <input placeholder="Enter Phone Number"
-                value="{{ $student->mother_phone }}" 
-                type="phone" 
-                id="m_phone"
-                name="m_phone"
-                spellcheck="false"
-                class="form-control col-sm-9"
-                />
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="class">Class<span class="required text-danger">*</span></label>
-            <select id="class" name="class" class="form-control col-sm-9" required>
-                @foreach($classes as $class)
-                    @if($student->class === $class->name)
-                        <option selected>{{$class->name}}</option>
-                    @else
-                        <option>{{$class->name}}</option>
-                    @endif
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="section">Section</label>
-            <select id="section" name="section" class="form-control col-sm-9" required>
-                @foreach($sections as $section)
-                    @if($section->name === $student->section)
-                        <option selected>{{$section->name}}</option>
-                    @else
-                        <option>{{$section->name}}</option>
-                    @endif
-                @endforeach
-            </select>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="group">Group</label>
-            <select id="group" name="group" class="form-control col-sm-9">
-                @switch($student->group)
-                    @case("Science")
-                        <option value="">N/A</option>
-                        <option selected>Science</option>
-                        <option>Business Studies</option>
-                        <option>Humanities</option>
-                    @break
-                    @case("Business Studies")
-                        <option value="">N/A</option>
-                        <option>Science</option>
-                        <option selected>Business Studies</option>
-                        <option>Humanities</option>
-                    @break
-                    @case("Humanities")
-                        <option value="">N/A</option>
-                        <option>Science</option>
-                        <option>Business Studies</option>
-                        <option selected>Humanities</option>
-                    @break
-                    @default
-                        <option value="">N/A</option>
-                        <option>Science</option>
-                        <option>Business Studies</option>
-                        <option>Humanities</option>
-                @endswitch
-            </select>
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="institute">Institute<span class="required text-danger">*</span></label>
-           <input placeholder="Enter Institute Name"
-                value="{{ $student->institute }}" 
-                id="institute"
-                required
-                name="institute"
-                spellcheck="false"
-                class="form-control col-sm-9"
-                />
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-sm-label text-right" for="dob">Date of Birth</label>
@@ -281,23 +185,135 @@
             </select>
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-sm-label text-right" for="fee">Monthly Fee<span class="required text-danger">*</span></label>
-            <input type="number" 
-                placeholder="Enter Amount" 
-                value="{{ $student->monthly_fee }}"
-                required 
-                id="fee"
-                name="fee"
-                spellcheck="false"
-                class="form-control col-sm-9"
-                />
-        </div>
-        <div class="form-group row">
             <label class="col-sm-2 col-sm-label text-right" for="photo">Photo</label>
             <input type="file" 
                 accept=".jpg, .jpeg, .png" 
                 id="photo"
                 name="photo"
+                spellcheck="false"
+                class="form-control col-sm-9"
+                />
+        </div>
+        <center><h2 class="text-primary">Contact Information</h2></center>
+        <hr>
+        <div class="form-group row">
+            <label class="col-sm-2 col-sm-label text-right" for="student_phone">Student's Phone Number</label>
+           <input placeholder="Enter Phone Number"
+                value="{{ $student->student_phone }}" 
+                type="phone" 
+                id="student_phone"
+                name="student_phone"
+                spellcheck="false"
+                class="form-control col-sm-9"
+                />
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-sm-label text-right" for="father_phone">Father's Phone Number</label>
+           <input placeholder="Enter Phone Number"
+                value="{{ $student->father_phone }}" 
+                type="phone" 
+                id="father_phone"
+                name="father_phone"
+                spellcheck="false"
+                class="form-control col-sm-9"
+                />
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-sm-label text-right" for="mother_phone">Mother's Phone Number</label>
+           <input placeholder="Enter Phone Number"
+                value="{{ $student->mother_phone }}" 
+                type="phone" 
+                id="mother_phone"
+                name="mother_phone"
+                spellcheck="false"
+                class="form-control col-sm-9"
+                />
+        </div>
+        <center><h2 class="text-primary">Academic Information</h2></center>
+        <hr>
+        <div class="form-group row">
+            <label class="col-sm-2 col-sm-label text-right" for="academic_year">Academic Year</label>
+           <input type="number" 
+                value="{{ $student->academic_year }}" 
+                id="academic_year"
+                name="academic_year"
+                spellcheck="false"
+                class="form-control col-sm-9"
+                />
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-sm-label text-right" for="class">Class<span class="required text-danger">*</span></label>
+            <select id="class" name="class" class="form-control col-sm-9" required>
+                @foreach($classes as $class)
+                    @if($student->class === $class->name)
+                        <option selected>{{$class->name}}</option>
+                    @else
+                        <option>{{$class->name}}</option>
+                    @endif
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-sm-label text-right" for="section">Section</label>
+            <select id="section" name="section" class="form-control col-sm-9" required>
+                @foreach($sections as $section)
+                    @if($section->name === $student->section)
+                        <option selected>{{$section->name}}</option>
+                    @else
+                        <option>{{$section->name}}</option>
+                    @endif
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-sm-label text-right" for="group">Group</label>
+            <select id="group" name="group" class="form-control col-sm-9">
+                @switch($student->group)
+                    @case("Science")
+                        <option value="">N/A</option>
+                        <option selected>Science</option>
+                        <option>Business Studies</option>
+                        <option>Humanities</option>
+                    @break
+                    @case("Business Studies")
+                        <option value="">N/A</option>
+                        <option>Science</option>
+                        <option selected>Business Studies</option>
+                        <option>Humanities</option>
+                    @break
+                    @case("Humanities")
+                        <option value="">N/A</option>
+                        <option>Science</option>
+                        <option>Business Studies</option>
+                        <option selected>Humanities</option>
+                    @break
+                    @default
+                        <option value="">N/A</option>
+                        <option>Science</option>
+                        <option>Business Studies</option>
+                        <option>Humanities</option>
+                @endswitch
+            </select>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-sm-label text-right" for="institute">Institute<span class="required text-danger">*</span></label>
+           <input placeholder="Enter Institute Name"
+                value="{{ $student->institute }}" 
+                id="institute"
+                required
+                name="institute"
+                spellcheck="false"
+                class="form-control col-sm-9"
+                />
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-sm-label text-right" for="monthly_fee">Monthly Fee<span class="required text-danger">*</span></label>
+            <input type="number" 
+                placeholder="Enter Amount" 
+                value="{{ $student->monthly_fee }}"
+                required 
+                id="monthly_fee"
+                name="monthly_fee"
                 spellcheck="false"
                 class="form-control col-sm-9"
                 />

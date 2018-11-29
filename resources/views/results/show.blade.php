@@ -25,10 +25,9 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col-sm-12 px-2">                    
-                      <table class="table table-striped table-hover">
+                      <table id="results" class="table table-striped table-hover">
                         <thead>
                         <tr>
-                          <th scope="col">Sl No.</th>
                           <th scope="col">Student ID</th>
                           <th scope="col">Student Name</th>
                           <th scope="col">Obtained Marks</th>
@@ -39,7 +38,6 @@
                       <tbody>
                         @foreach($results as $serial=>$result)
                             <tr>
-                              <th scope="row">{{ $serial+1 }}</th>
                               <td>{{ $result->student_id }}</td>
                               <td>{{ $result->student->name }}</td>
                               <td>{{ $result->marks }}</td>
@@ -56,4 +54,12 @@
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+<script type="text/javascript">
+    $(document).ready(function() {
+      $.noConflict();
+      $('#results').DataTable();
+    });
+</script>
 @endsection

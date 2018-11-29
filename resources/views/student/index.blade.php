@@ -12,10 +12,9 @@
                 </center>
 
                 <div class="card-body">
-                    <table class="table table-striped table-bordered table-hover">
+                    <table id="students" class="table table-striped table-bordered table-hover">
                       <thead>
                         <tr>
-                          <th scope="col">Sl No.</th>
                           <th scope="col">ID</th>
                           <th scope="col">Name</th>
                           <th scope="col">Class</th>
@@ -26,7 +25,6 @@
                       <tbody>
                         @foreach($students as $serial=>$student)
                             <tr>
-                              <th scope="row">{{ $serial+1 }}</th>
                               <td>{{ $student->id }}</td>
                               <td>{{ $student->name }}</td>
                               <td>{{ $student->class }}</td>
@@ -75,6 +73,16 @@
                           />
                   </div>
                   <div class="form-group row my-4 searchByClassDiv">
+                      <label class="col-sm-2 col-sm-label text-right" for="academic_year">Academic Year</label>
+                     <input type=number
+                          value="{{ Date('Y') }}" 
+                          id="academic_year"
+                          name="academic_year"
+                          spellcheck="false"
+                          class="form-control col-sm-9 mx-3"
+                          />
+                  </div>
+                  <div class="form-group row my-4 searchByClassDiv">
                       <label class="col-sm-2 col-sm-label text-right" for="class">Class</label>
                       <select id="class" name="class" class="form-control col-sm-9" required>
                           @foreach($classes as $class)
@@ -111,6 +119,9 @@
 @section('scripts')
   <script type="text/javascript">
       $(document).ready(function() {
+        $.noConflict();
+        $('#students').DataTable();
+
         if(document.getElementById('searchByStudent').checked) {
           $('.searchByStudentDiv').show();
           $('.searchByClassDiv').hide();
@@ -127,12 +138,13 @@
               $('.searchByClassDiv').slideDown();
             }
         });
-        //Ajax Call
+        //Ajax Setup
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
-          });
+        });
+        //Ajax Call for getting class wise sections
         $.ajax({
            type:'GET',
            url:'/getSections',

@@ -45,65 +45,68 @@ class StudentsController extends Controller
     {
         //
         $request->validate([
-            's_name' => 'required|string|max:255',
-            'f_name' => 'required|string|max:255',
-            'm_name' => 'required|string|max:255',
-            'pres_address' => 'nullable|string|max:255',
-            'perm_address' => 'nullable|string|max:255',
-            'personal_phone' => 'nullable|string|max:11',
-            'father_phone' => 'nullable|string|max:11',
-            'mother_phone' => 'nullable|string|max:11',
+            'name' => 'required|string|max:255',
+            'father_name' => 'required|string|max:255',
+            'mother_name' => 'required|string|max:255',
+            'present_address' => 'nullable|string|max:255',
+            'permanent_address' => 'nullable|string|max:255',
+            'student_phone' => 'nullable|regex:/(01)[0-9]{9}/',
+            'father_phone' => 'nullable|regex:/(01)[0-9]{9}/',
+            'mother_phone' => 'nullable|regex:/(01)[0-9]{9}/',
+            'academic_year' => 'integer|regex:/(20)[0-9]{2}/',
             'class' => 'required|string|max:255',
             'section' => 'required|string|max:255',
             'institute' => 'required|string|max:255',
             'dob' => 'nullable|date',
-            'fee' => 'required|integer'
+            'blood_group' => ['nullable', 'regex:/(A|B|AB|O)[+-]/'],
+            'monthly_fee' => 'required|integer'
         ]);
 
         $student = new Student();
-        $student->name = $request->s_name;
-        $student->father_name = $request->f_name;
-        $student->mother_name = $request->m_name;
-        $student->present_address = $request->pres_address;
-        $student->permanent_address = $request->perm_address;
-        $student->personal_phone = $request->s_phone;
-        $student->father_phone = $request->f_phone;
-        $student->mother_phone = $request->m_phone;
+        $student->name = $request->name;
+        $student->father_name = $request->father_name;
+        $student->mother_name = $request->mother_name;
+        $student->present_address = $request->present_address;
+        $student->permanent_address = $request->permanent_address;
+        $student->student_phone = $request->student_phone;
+        $student->father_phone = $request->father_phone;
+        $student->mother_phone = $request->mother_phone;
+        $student->academic_year = $request->academic_year;
         $student->class = $request->class;
         $student->section = $request->section;
         $student->group = $request->group;
         $student->institute = $request->institute;
         $student->dob = $request->dob;
         $student->blood_group = $request->blood_group;
-        $student->monthly_fee = $request->fee;
+        $student->monthly_fee = $request->monthly_fee;
 
-        //generating the Student ID
+        //generating the Student ID[10{academic year}{class}{serial}]
         $classObject = Classes::where('name',$request->class)->first();
         $class = $classObject->class;
-        $lastStudent = Student::where('class',$request->class)->orderBy('created_at','desc')->first();
+        $lastStudent = Student::where(['class' => $request->class, 'academic_year' => $request->academic_year])->orderBy('created_at','desc')->first();
         $id=null;
         if($lastStudent) {//if previous student exists of this class
             $lastId = $lastStudent->id;
             $idSerial = (int)substr($lastId, 8)+1;
             if($idSerial<10) {
                 if($class <10) {
-                    $id = '10'.date('Y').'0'.$class.'0'.$idSerial;
+                    $id = '10'.$request->academic_year.'0'.$class.'0'.$idSerial;
                 }else {
-                    $id = '10'.date('Y').$class.'0'.$idSerial;
+                    $id = '10'.$request->academic_year.$class.'0'.$idSerial;
                 }
             }else {
                 if($class <10) {
-                    $id = '10'.date('Y').'0'.$class.$idSerial;
+                    $id = '10'.$request->academic_year.'0'.$class.$idSerial;
                 }else {
-                    $id = '10'.date('Y').$class.$idSerial;
+                    $id = '10'.$request->academic_year.$class.$idSerial;
                 }
             }
         }else {//if no previous student exists of this class
             $idSerial = 1;
             if($class <10) {
-                $id = '10'.date('Y').'0'.$class.'0'.$idSerial;
+                $id = '10'.$request->academic_year.'0'.$class.'0'.$idSerial;
             }else {
-                $id = '10'.date('Y').$class.'0'.$idSerial;
+                $id = '10'.$request->academic_year.$class.'0'.$idSerial;
             }
         }
 
@@ -162,37 +165,40 @@ class StudentsController extends Controller
     {
         //
         $request->validate([
-            's_name' => 'required|string|max:255',
-            'f_name' => 'required|string|max:255',
-            'm_name' => 'required|string|max:255',
-            'pres_address' => 'nullable|string|max:255',
-            'perm_address' => 'nullable|string|max:255',
-            'personal_phone' => 'nullable|string|max:11',
-            'father_phone' => 'nullable|string|max:11',
-            'mother_phone' => 'nullable|string|max:11',
+            'name' => 'required|string|max:255',
+            'father_name' => 'required|string|max:255',
+            'mother_name' => 'required|string|max:255',
+            'present_address' => 'nullable|string|max:255',
+            'permanent_address' => 'nullable|string|max:255',
+            'student_phone' => 'nullable|regex:/(01)[0-9]{9}/',
+            'father_phone' => 'nullable|regex:/(01)[0-9]{9}/',
+            'mother_phone' => 'nullable|regex:/(01)[0-9]{9}/',
+            'academic_year' => 'integer|regex:/(20)[0-9]{2}/',
             'class' => 'required|string|max:255',
             'section' => 'required|string|max:255',
             'institute' => 'required|string|max:255',
+            'blood_group' => ['nullable', 'regex:/(A|B|AB|O)[+-]/'],
             'dob' => 'nullable|date',
-            'fee' => 'required|integer'
+            'monthly_fee' => 'required|integer'
         ]);
 
         $student = Student::find($student->id);
-        $student->name = $request->s_name;
-        $student->father_name = $request->f_name;
-        $student->mother_name = $request->m_name;
-        $student->present_address = $request->pres_address;
-        $student->permanent_address = $request->perm_address;
-        $student->personal_phone = $request->s_phone;
-        $student->father_phone = $request->f_phone;
-        $student->mother_phone = $request->m_phone;
+        $student->name = $request->name;
+        $student->father_name = $request->father_name;
+        $student->mother_name = $request->mother_name;
+        $student->present_address = $request->present_address;
+        $student->permanent_address = $request->permanent_address;
+        $student->student_phone = $request->student_phone;
+        $student->father_phone = $request->father_phone;
+        $student->mother_phone = $request->mother_phone;
+        $student->academic_year = $request->academic_year;
         $student->class = $request->class;
         $student->section = $request->section;
         $student->group = $request->group;
         $student->institute = $request->institute;
         $student->dob = $request->dob;
         $student->blood_group = $request->blood_group;
-        $student->monthly_fee = $request->fee;
+        $student->monthly_fee = $request->monthly_fee;
 
         //file Upload
         if($request->hasFile('photo')) {
@@ -292,12 +298,13 @@ class StudentsController extends Controller
                 return redirect()->route('students.index')->with('errors','No Student found with this ID');
             }
         }else if($searchType==="Search By Class") {
+            $academicYear = $request->academic_year;
             $class = $request->class;
             $section = $request->section;
             if($section==="All"){
-                $hasStudent = Student::where('class', $class)->get()->first();
+                $hasStudent = Student::where(['academic_year' => $academicYear, 'class' => $class])->get()->first();
                 if($hasStudent) {
-                    $students = Student::where('class', $class)->get();
+                    $students = Student::where(['class' => $class, 'academic_year' => $academicYear])->get();
                     $classes = Classes::all();
                     $sections = Section::all();
                     return view('student.index',['students'=>$students, 'classes'=>$classes, 'sections'=>$sections]);
@@ -305,9 +312,9 @@ class StudentsController extends Controller
                     return redirect()->route('students.index')->with('errors','No Student found');
                 }
             }else {
-                $hasStudent = Student::where(['class'=>$class, 'section'=>$section])->get()->first();
+                $hasStudent = Student::where(['academic_year' => $academicYear, 'class'=>$class, 'section'=>$section])->get()->first();
                 if($hasStudent) {
-                    $students = Student::where(['class'=>$class, 'section'=>$section])->get();
+                    $students = Student::where(['academic_year' => $academicYear, 'class'=>$class, 'section'=>$section])->get();
                     $classes = Classes::all();
                     $sections = Section::all();
                     return view('student.index',['students'=>$students, 'classes'=>$classes, 'sections'=>$sections]);

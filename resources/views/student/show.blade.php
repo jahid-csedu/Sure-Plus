@@ -38,8 +38,8 @@
                               <td>{{ $student->permanent_address }}</td>
                             </tr>
                             <tr>
-                              <td>Personal Phone Number</td>
-                              <td>{{ $student->personal_phone }}</td>
+                              <td>Student's Phone Number</td>
+                              <td>{{ $student->student_phone }}</td>
                             </tr>
                             <tr>
                               <td>Father's Phone Number</td>
@@ -48,6 +48,10 @@
                             <tr>
                               <td>Mother's Phone Number</td>
                               <td>{{ $student->mother_phone }}</td>
+                            </tr>
+                            <tr>
+                              <td>Academic Year</td>
+                              <td>{{ $student->academic_year }}</td>
                             </tr>
                             <tr>
                               <td>Class</td>

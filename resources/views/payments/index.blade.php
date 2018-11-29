@@ -12,10 +12,9 @@
                 </center>
 
                 <div class="card-body">
-                    <table class="table table-striped table-bordered table-hover">
+                    <table id="payments" class="table table-striped table-bordered table-hover">
                       <thead>
                         <tr>
-                          <th scope="col">Sl No.</th>
                           <th scope="col">Date</th>
                           <th scope="col">Student ID</th>
                           <th scope="col">Student Name</th>
@@ -27,7 +26,6 @@
                       <tbody>
                         @foreach($payments as $serial=>$payment)
                             <tr>
-                              <th scope="row">{{ $serial+1 }}</th>
                               <td>{{ $payment->date }}</td>
                               <td>{{ $payment->student_id }}</td>
                               <td>{{ $payment->student->name }}</td>
@@ -123,6 +121,8 @@
 @section('scripts')
   <script type="text/javascript">
       $(document).ready(function() {
+        $.noConflict();
+        $('#payments').DataTable();
         if(document.getElementById('searchByStudent').checked) {
           $('.searchByStudentDiv').show();
           $('.searchByDateDiv').hide();

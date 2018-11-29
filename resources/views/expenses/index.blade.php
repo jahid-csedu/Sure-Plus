@@ -15,7 +15,6 @@
                     <table class="table table-striped table-bordered table-hover">
                       <thead>
                         <tr>
-                          <th scope="col">Sl No.</th>
                           <th scope="col">Date</th>
                           <th scope="col">Description</th>
                           <th scope="col">Amount</th>
@@ -24,7 +23,6 @@
                       <tbody>
                         @foreach($expenses as $serial=>$expense)
                             <tr>
-                              <th scope="row">{{ $serial+1 }}</th>
                               <td>{{ $expense->date }}</td>
                               <td>{{ $expense->description }}</td>
                               <td>{{ $expense->amount }}</td>
@@ -49,7 +47,7 @@
           <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Search Payments</h5>
+                <h5 class="modal-title">Search Expenses</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>

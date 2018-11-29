@@ -39,5 +39,50 @@
 
         </div>
     </div>
+    <div class="row">
+      <div class="col-md-12 col-lg-12 col-sm-auto py-3">
+        <div class="card">
+          <div class="card-header">
+            <center>
+              <h2>Payments Received in {{ Date('F')."- ".Date('Y') }}</h2>
+            </center>
+          </div>
+          <div class="card-body">
+            <table class="table table-striped table-bordered table-hover" id="payments">
+              <thead>
+                <tr>
+                  <th scope="col">Student ID</th>
+                  <th scope="col">Student Name</th>
+                  <th scope="col">Class</th>
+                  <th scope="col">Section</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach($payments as $serial=>$payment)
+                    <tr>
+                      <td>{{ $payment->student_id }}</td>
+                      <td>{{ $payment->student->name }}</td>
+                      <td>{{ $payment->student->class }}</td>
+                      <td>{{ $payment->student->section }}</td>
+                      <td>{{ $payment->date }}</td>
+                      <td>{{ $payment->amount }}</td>
+                    </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
+@endsection
+@section('scripts')
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $.noConflict();
+      $('#payments').DataTable();
+    });
+  </script>
 @endsection

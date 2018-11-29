@@ -20,6 +20,7 @@ class Student extends Model
     	'personal_phone',
     	'father_phone',
     	'mother_phone',
+        'academic_year',
     	'class',
     	'section',
     	'group',

@@ -15,7 +15,6 @@
                     <table class="table table-striped table-bordered table-hover">
                       <thead>
                         <tr>
-                          <th scope="col">Sl No.</th>
                           <th scope="col">ID</th>
                           <th scope="col">Name</th>
                           <th scope="col">Designation</th>
@@ -26,7 +25,6 @@
                       <tbody>
                         @foreach($employees as $serial=>$employee)
                             <tr data-href=>
-                              <th scope="row">{{ $serial+1 }}</th>
                               <td>{{ $employee->id }}</td>
                               <td>{{ $employee->name }}</td>
                               <td>{{ $employee->designation }}</td>

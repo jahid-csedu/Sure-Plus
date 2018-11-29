@@ -20,9 +20,10 @@ class CreateStudentsTable extends Migration
             $table->string('mother_name')->nullable();
             $table->string('present_address')->nullable();
             $table->string('permanent_address')->nullable();
-            $table->string('personal_phone',11)->nullable();
+            $table->string('student_phone',11)->nullable();
             $table->string('father_phone',11)->nullable();
             $table->string('mother_phone',11)->nullable();
+            $table->integer('academic_year')->unsigned();
             $table->string('class');
             $table->string('section')->nullable();
             $table->string('group')->nullable();

@@ -102,7 +102,7 @@ class ResultsController extends Controller
     {
         //
         $exam = Exam::find($examId);
-        $results = Result::where('exam_id', $examId)->get();
+        $results = Result::where('exam_id', $examId)->orderBy('marks','desc')->get();
         $highest = Result::where('exam_id', $examId)->max('marks');
         return view('results.show', ['results'=>$results, 'exam'=>$exam, 'highest'=>$highest]); 
     }
