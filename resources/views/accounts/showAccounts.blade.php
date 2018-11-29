@@ -11,10 +11,9 @@
                 </center>
 
                 <div class="card-body">
-                    <table class="table table-striped table-bordered table-hover">
+                    <table id="accounts" class="table table-striped table-bordered table-hover">
                       <thead>
                         <tr>
-                          <th scope="col">Sl No.</th>
                           <th scope="col">Date</th>
                           <th scope="col">Description</th>
                           <th scope="col">Debit</th>
@@ -23,25 +22,33 @@
                       <tbody>
                         @foreach($accounts as $serial=>$account)
                             <tr>
-                              <th scope="row">{{ $serial+1 }}</th>
                               <td>{{ $account->date }}</td>
                               <td>{{ $account->description }}</td>
                               <td>{{ $account->debit }}</td>
                               <td>{{ $account->credit }}</td>
                             </tr>
                         @endforeach
+                      </tbody>
+                      <tfoot>
                         <tr class="font-weight-bold bg-warning">
-                            <th scope="row"></th>
                             <td></td>
                             <td>Total</td>
                             <td>{{ $totalDebit }}</td>
                             <td>{{ $totalCredit }}</td>
                         </tr>
-                      </tbody>
+                      </tfoot>
                     </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+<script type="text/javascript">
+    $(document).ready(function() {
+      $.noConflict();
+      $('#accounts').DataTable();
+    });
+</script>
 @endsection

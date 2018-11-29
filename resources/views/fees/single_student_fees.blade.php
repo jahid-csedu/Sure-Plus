@@ -105,6 +105,8 @@
 @section('scripts')
   <script type="text/javascript">
       $(document).ready(function() {
+        $.noConflict();
+        $('#fees').DataTable();
         if(document.getElementById('searchByStudent').checked) {
           $('.searchByStudentDiv').show();
           $('.searchByClassDiv').hide();

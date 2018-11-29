@@ -12,7 +12,7 @@
                 </center>
 
                 <div class="card-body">
-                    <table class="table table-striped table-bordered table-hover">
+                    <table id="employees" class="table table-striped table-bordered table-hover">
                       <thead>
                         <tr>
                           <th scope="col">ID</th>
@@ -77,4 +77,12 @@
 
     </div>
 </div>
+@endsection
+@section('scripts')
+<script type="text/javascript">
+    $(document).ready(function() {
+      $.noConflict();
+      $('#employees').DataTable();
+    });
+</script>
 @endsection

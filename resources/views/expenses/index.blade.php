@@ -12,7 +12,7 @@
                 </center>
 
                 <div class="card-body">
-                    <table class="table table-striped table-bordered table-hover">
+                    <table id="expenses" class="table table-striped table-bordered table-hover">
                       <thead>
                         <tr>
                           <th scope="col">Date</th>
@@ -90,4 +90,12 @@
         <!-- End Modal-->
     </div>
 </div>
+@endsection
+@section('scripts')
+<script type="text/javascript">
+    $(document).ready(function() {
+      $.noConflict();
+      $('#expenses').DataTable();
+    });
+</script>
 @endsection

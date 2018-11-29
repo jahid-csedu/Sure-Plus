@@ -12,7 +12,7 @@
                 </center>
 
                 <div class="card-body">
-                    <table class="table table-striped table-bordered table-hover">
+                    <table id="exams" class="table table-striped table-bordered table-hover">
                       <thead>
                         <tr>
                           <th scope="col">ID</th>
@@ -133,6 +133,8 @@
 @section('scripts')
   <script type="text/javascript">
       $(document).ready(function() {
+        $.noConflict();
+        $('#exams').DataTable();
         if(document.getElementById('searchByDate').checked) {
           $('.searchByDateDiv').show();
           $('.searchByClassDiv').hide();
