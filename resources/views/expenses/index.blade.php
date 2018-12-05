@@ -27,11 +27,33 @@
                               <td>{{ $expense->description }}</td>
                               <td>{{ $expense->amount }}</td>
                               <td>
-                                <form method="POST" action="{{ route('expenses.destroy', $expense->id) }}">
-                                  @csrf
-                                  @method('DELETE')
-                                  <button type="submit" class="btn btn-danger btn-sm mx-3">Delete</button>
-                                </form>
+                                <a href="#" class="btn btn-danger btn-sm mx-3" data-toggle="modal" data-target="#deleteConfirmationModal{{ $expense->id }}">Delete</a>
+
+                                  <!-- Delete Confirmation Modal -->
+                                  <div class="modal fade" id="deleteConfirmationModal{{ $expense->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="deleteConfirmationModalLongTitle">Delete Confirmation</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                          <h3>Are you sure you want to delete this Expense?</h3>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                          <!-- Delete Form -->
+                                          <form method="POST" action="{{ route('expenses.destroy', $expense->id) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                          </form>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
                               </td>
 
                             </tr>

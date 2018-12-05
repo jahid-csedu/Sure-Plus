@@ -36,12 +36,34 @@
                               <td>{{ $exam->date }}</td>
                               <td>{{ $exam->total_marks }}</td>
                               <td>
-                                <form method="POST" action="{{ route('exams.destroy', $exam->id) }}">
-                                  @csrf
-                                  @method('DELETE')
                                   <a class="btn btn-info btn-sm" href="{{ route('exams.edit', $exam->id) }}">Edit</a>
-                                  <button type="submit" class="btn btn-danger btn-sm mx-3">Delete</button>
-                                </form>
+                                  <a href="#" class="btn btn-danger btn-sm mx-3" data-toggle="modal" data-target="#deleteConfirmationModal{{ $exam->id }}">Delete</a>
+
+                                  <!-- Delete Confirmation Modal -->
+                                  <div class="modal fade" id="deleteConfirmationModal{{ $exam->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="deleteConfirmationModalLongTitle">Delete Confirmation</h5>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                          <h3>Are you sure you want to delete this Exam?</h3>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                          <!-- Delete Form -->
+                                          <form method="POST" action="{{ route('exams.destroy', $exam->id) }}">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                          </form>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
                               </td>
 
                             </tr>
@@ -151,6 +173,37 @@
               $('.searchByClassDiv').slideDown();
             }
         });
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+          $.ajax({
+             type:'GET',
+             url:'/getSections',
+             data:{class:$('#class').val()},
+             success:function(sections){
+                var options="<option>All</option>";
+                for(var i=0; i<sections.length; i++) {
+                  options += "<option>"+sections[i].name+"</option>";
+                }
+                document.getElementById('section').innerHTML=options;
+             }
+          });
+          $('#class').change(function() {
+              $.ajax({
+                 type:'GET',
+                 url:'/getSections',
+                 data:{class:this.value},
+                 success:function(sections){
+                    var options="<option>All</option>";
+                    for(var i=0; i<sections.length; i++) {
+                      options += "<option>"+sections[i].name+"</option>";
+                    }
+                    document.getElementById('section').innerHTML=options;
+                 }
+              });
+          });
       });
   </script>
 @endsection

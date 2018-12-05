@@ -149,17 +149,25 @@
            type:'GET',
            url:'/getSections',
            data:{class:$('#class').val()},
-           success:function(data){
-              $('#section').append=data;
-           }
+           success:function(sections){
+              var options="";
+              for(var i=0; i<sections.length; i++) {
+                options += "<option>"+sections[i].name+"</option>";
+              }
+              document.getElementById('section').innerHTML=options;           
+            }
         });
         $('#class').change(function() {
             $.ajax({
                type:'GET',
                url:'/getSections',
                data:{class:this.value},
-               success:function(data){
-                  $('#section').append=data;
+               success:function(sections){
+                var options="";
+                for(var i=0; i<sections.length; i++) {
+                  options += "<option>"+sections[i].name+"</option>";
+                }
+                document.getElementById('section').innerHTML=options;
                }
             });
         });

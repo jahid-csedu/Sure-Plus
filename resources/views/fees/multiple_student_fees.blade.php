@@ -11,7 +11,7 @@
                 </center>
 
                 <div class="card-body">
-                    <table class="table table-striped table-bordered table-hover">
+                    <table id="fees" class="table table-striped table-bordered table-hover">
                       <thead>
                         <tr>
                           <th scope="col">Student ID</th>
@@ -107,6 +107,8 @@
 @section('scripts')
   <script type="text/javascript">
       $(document).ready(function() {
+        $.noConflict();
+        $('#fees').DataTable();
         if(document.getElementById('searchByStudent').checked) {
           $('.searchByStudentDiv').show();
           $('.searchByClassDiv').hide();
@@ -123,6 +125,37 @@
               $('.searchByClassDiv').slideDown();
             }
         });
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+          $.ajax({
+             type:'GET',
+             url:'/getSections',
+             data:{class:$('#class').val()},
+             success:function(sections){
+                var options="<option>All</option>";
+                for(var i=0; i<sections.length; i++) {
+                  options += "<option>"+sections[i].name+"</option>";
+                }
+                document.getElementById('section').innerHTML=options;
+             }
+          });
+          $('#class').change(function() {
+              $.ajax({
+                 type:'GET',
+                 url:'/getSections',
+                 data:{class:this.value},
+                 success:function(sections){
+                    var options="<option>All</option>";
+                    for(var i=0; i<sections.length; i++) {
+                      options += "<option>"+sections[i].name+"</option>";
+                    }
+                    document.getElementById('section').innerHTML=options;
+                 }
+              });
+          });
       });
   </script>
 @endsection

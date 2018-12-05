@@ -156,11 +156,7 @@ class SectionsController extends Controller
         if($request->ajax()) {
             $class = $request->class;
             $sections = Section::where('class', $class)->get();
-            $options = "";
-            foreach($sections as $section) {
-                $options .= "<option>".$section->name."</option>";
-            }
-            return $options;
+            return $sections;
         }
     }
 }
