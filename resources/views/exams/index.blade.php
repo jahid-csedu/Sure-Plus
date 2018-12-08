@@ -177,33 +177,34 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
-          });
-          $.ajax({
-             type:'GET',
-             url:'/getSections',
-             data:{class:$('#class').val()},
-             success:function(sections){
-                var options="<option>All</option>";
-                for(var i=0; i<sections.length; i++) {
-                  options += "<option>"+sections[i].name+"</option>";
-                }
-                document.getElementById('section').innerHTML=options;
-             }
-          });
-          $('#class').change(function() {
-              $.ajax({
-                 type:'GET',
-                 url:'/getSections',
-                 data:{class:this.value},
-                 success:function(sections){
-                    var options="<option>All</option>";
-                    for(var i=0; i<sections.length; i++) {
-                      options += "<option>"+sections[i].name+"</option>";
-                    }
-                    document.getElementById('section').innerHTML=options;
-                 }
-              });
-          });
+        });
+        $.ajax({
+           type:'GET',
+           url:'/getSections',
+           data:{class:$('#class').val()},
+           success:function(sections){
+              var options="<option>All</option>";
+              for(var i=0; i<sections.length; i++) {
+                options += "<option>"+sections[i].name+"</option>";
+              }
+              document.getElementById('section').innerHTML=options;
+              document.getElementById('section').selectedIndex=-1;
+           }
+        });
+        $('#class').change(function() {
+            $.ajax({
+               type:'GET',
+               url:'/getSections',
+               data:{class:this.value},
+               success:function(sections){
+                  var options="<option>All</option>";
+                  for(var i=0; i<sections.length; i++) {
+                    options += "<option>"+sections[i].name+"</option>";
+                  }
+                  document.getElementById('section').selectedIndex=-1;
+               }
+            });
+        });
       });
   </script>
 @endsection

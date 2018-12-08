@@ -28,11 +28,11 @@
                         @csrf
                             <input type="hidden" name="exam_id" value="{{ $exam->id }}">
                             @foreach($students as $student)
-                                <div class="form-group row">
-                                    <tr>
-                                        <td>
-                                            <label class="col-sm-3 col-sm-label font-weight-bold" for="{{$student->id}}">
-                                                {{ $student->name . '('.$student->id.')' }}
+                                <div class="form-group">
+                                    <tr class="input-group">
+                                        <td class="input-group-prepend">
+                                            <label class="input-group-text bg-info" for="{{$student->id}}">
+                                                {{ $student->name . '-'.$student->id }}
                                             </label>
                                         </td>
                                         <input type="number" 
@@ -41,8 +41,8 @@
                                             required
                                             name="{{$student->id}}"
                                             spellcheck="false"
-                                            class="form-control col-sm-9"
-                                            />
+                                            class="form-control col-sm-12"
+                                        />
                                     </tr>
                                 </div>
                             @endforeach

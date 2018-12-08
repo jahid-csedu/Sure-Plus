@@ -211,6 +211,7 @@
                     options += "<option>"+sections[i].name+"</option>";
                   }
                   document.getElementById('section').innerHTML=options;
+                  document.getElementById('section').selectedIndex=-1;
                }
             });
             $('#class').change(function() {
@@ -223,7 +224,7 @@
                       for(var i=0; i<sections.length; i++) {
                         options += "<option>"+sections[i].name+"</option>";
                       }
-                      document.getElementById('section').innerHTML=options;
+                      document.getElementById('section').selectedIndex=-1;
                    }
                 });
             });

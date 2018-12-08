@@ -69,26 +69,26 @@ class ExamsController extends Controller
         $id=null;
         if($lastExam) {//if previous student exists of this class
             $lastId = $lastExam->id;
-            $idSerial = (int)substr($lastId, 8)+1;
+            $idSerial = (int)substr($lastId, 5)+1;
             if($idSerial<10) {
                 if($request->class <10) {
-                    $id = '20'.date('Y').'0'.$class.'0'.$idSerial;
+                    $id = '3'.date('y').'0'.$class.'0'.$idSerial;
                 }else {
-                    $id = '20'.date('Y').$class.'0'.$idSerial;
+                    $id = '3'.date('y').$class.'0'.$idSerial;
                 }
             }else {
                 if($request->class <10) {
-                    $id = '20'.date('Y').'0'.$class.$idSerial;
+                    $id = '3'.date('y').'0'.$class.$idSerial;
                 }else {
-                    $id = '20'.date('Y').$class.$idSerial;
+                    $id = '3'.date('y').$class.$idSerial;
                 }
             }
         }else {//if no previous student exists of this class
             $idSerial = 1;
             if($request->class <10) {
-                $id = '20'.date('Y').'0'.$class.'0'.$idSerial;
+                $id = '3'.date('y').'0'.$class.'0'.$idSerial;
             }else {
-                $id = '20'.date('Y').$class.'0'.$idSerial;
+                $id = '3'.date('y').$class.'0'.$idSerial;
             }
         }
 

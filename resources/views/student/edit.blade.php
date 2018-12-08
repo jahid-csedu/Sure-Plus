@@ -172,7 +172,7 @@
                         <option selected>O-</option>
                     @break
                     @default
-                        <option>N/A</option>
+                        <option value="">N/A</option>
                         <option>A+</option>
                         <option>A-</option>
                         <option>B+</option>

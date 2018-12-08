@@ -83,30 +83,33 @@ class StudentsController extends Controller
         //generating the Student ID[10{academic year}{class}{serial}]
         $classObject = Classes::where('name',$request->class)->first();
         $class = $classObject->class;
-        $lastStudent = Student::where(['class' => $request->class, 'academic_year' => $request->academic_year])->orderBy('created_at','desc')->first();
+        $lastStudent = Student::where(['class'=> $request->class], ['academic_year'=> $request->academic_year])
+                        ->orderBy('created_at','desc')
+                        ->first();
         $id=null;
+        $year = substr($request->academic_year, 2);
         if($lastStudent) {//if previous student exists of this class
             $lastId = $lastStudent->id;
-            $idSerial = (int)substr($lastId, 8)+1;
+            $idSerial = (int)substr($lastId, 5)+1;
             if($idSerial<10) {
                 if($class <10) {
-                    $id = '10'.$request->academic_year.'0'.$class.'0'.$idSerial;
+                    $id = '1'.$year.'0'.$class.'0'.$idSerial;
                 }else {
-                    $id = '10'.$request->academic_year.$class.'0'.$idSerial;
+                    $id = '1'.$year.$class.'0'.$idSerial;
                 }
             }else {
                 if($class <10) {
-                    $id = '10'.$request->academic_year.'0'.$class.$idSerial;
+                    $id = '1'.$year.'0'.$class.$idSerial;
                 }else {
-                    $id = '10'.$request->academic_year.$class.$idSerial;
+                    $id = '1'.$year.$class.$idSerial;
                 }
             }
         }else {//if no previous student exists of this class
             $idSerial = 1;
             if($class <10) {
-                $id = '10'.$request->academic_year.'0'.$class.'0'.$idSerial;
+                $id = '1'.$year.'0'.$class.'0'.$idSerial;
             }else {
-                $id = '10'.$request->academic_year.$class.'0'.$idSerial;
+                $id = '1'.$year.$class.'0'.$idSerial;
             }
         }
 

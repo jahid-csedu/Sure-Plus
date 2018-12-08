@@ -98,8 +98,12 @@
                    type:'GET',
                    url:'/getSections',
                    data:{class:this.value},
-                   success:function(data){
-                      document.getElementById('section').innerHTML=data;
+                   success:function(sections){
+                      var options="<option>All</option>";
+                      for(var i=0; i<sections.length; i++) {
+                        options += "<option>"+sections[i].name+"</option>";
+                      }
+                      document.getElementById('section').selectedIndex=-1;
                    }
                 });
             });
