@@ -15,10 +15,16 @@ class CreateExpensesTable extends Migration
     {
         Schema::create('expenses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('description');
+            $table->string('type');
+            $table->string('employee_id')->nullable();
+            $table->string('month')->nullable();
+            $table->integer('year')->nullable();
+            $table->text('description');
             $table->integer('amount')->unsigned();
             $table->date('date');
             $table->timestamps();
+
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
         });
     }
 

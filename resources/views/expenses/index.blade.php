@@ -27,6 +27,7 @@
                               <td>{{ $expense->description }}</td>
                               <td>{{ $expense->amount }}</td>
                               <td>
+                                <a href="{{ route('expenses.edit', $expense->id) }}" class="btn btn-info btn-sm mx-3">Edit</a>
                                 <a href="#" class="btn btn-danger btn-sm mx-3" data-toggle="modal" data-target="#deleteConfirmationModal{{ $expense->id }}">Delete</a>
 
                                   <!-- Delete Confirmation Modal -->
