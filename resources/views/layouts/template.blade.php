@@ -102,9 +102,9 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/create_user">
+                <a class="nav-link" href="/users">
                   <i class="fas fa-user"></i>
-                  <b class="px-1">Create User</b>
+                  <b class="px-1">Users</b>
                 </a>
               </li>
             </ul>

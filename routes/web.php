@@ -30,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::resource('payments','PaymentsController');
 	Route::resource('expenses', 'ExpensesController');
 	Route::resource('accounts', 'AccountsController');
+	Route::resource('users', 'UsersController');
 
 	Route::get('fees','StudentsController@showFees');
 	Route::post('searchFees','StudentsController@searchFees');
@@ -40,7 +41,5 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('searchExams','ExamsController@searchExam');
 	Route::get('showResult','ResultsController@showResult');
 	Route::get('getSections', 'SectionsController@getSections');
-	Route::get('create_user', 'UsersController@create');
-	Route::post('user_register', 'UsersController@store');
 
 });
