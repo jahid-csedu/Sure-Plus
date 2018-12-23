@@ -6,12 +6,13 @@
         Add A New Payment
     </h2>
     <hr>
-    <form method="post" action="{{ route('payments.store') }}">
+    <form method="post" action="{{ route('payments.update', $payment) }}">
         @csrf
+        @method('PUT')
         <div class="form-group row">
             <label class="col-sm-2 col-sm-label text-right" for="student_id">Student ID<span class="required text-danger">*</span></label>
            <input placeholder="Enter ID"
-                value="{{ old('student_id') }}"
+                value="{{ $payment->student_id }}"
                 id="student_id"
                 required
                 name="student_id"
@@ -22,53 +23,82 @@
         <div class="form-group row">
             <label class="col-sm-2 col-sm-label text-right" for="type">Payment Type<span class="required text-danger">*</span></label>
             <select id="type" name="type" class="form-control col-sm-9" required>
-                <option>Monthly Fee</option>
-                <option>Admission Fee</option>
-                <option>Model Test Fee</option>
-                <option>Others</option>
+                @switch($payment->type)
+                    @case('Monthly Fee')
+                        <option selected>Monthly Fee</option>
+                        <option>Admission Fee</option>
+                        <option>Model Test Fee</option>
+                        <option>Others</option>
+                    @break
+                    @case('Admission Fee')
+                        <option>Monthly Fee</option>
+                        <option selected>Admission Fee</option>
+                        <option>Model Test Fee</option>
+                        <option>Others</option>
+                    @break
+                    @case('Model Test Fee')
+                        <option>Monthly Fee</option>
+                        <option>Admission Fee</option>
+                        <option selected>Model Test Fee</option>
+                        <option>Others</option>
+                    @break
+                    @default
+                        <option>Monthly Fee</option>
+                        <option>Admission Fee</option>
+                        <option>Model Test Fee</option>
+                        <option selected>Others</option>
+                @endswitch
             </select>
         </div>
         <div class="form-group row monthly">
+          <?php $months = array('January',
+                                'February',
+                                'March',
+                                'April',
+                                'May',
+                                'June',
+                                'July',
+                                'August',
+                                'September',
+                                'October',
+                                'November',
+                                'December'
+                          );?>
             <label class="col-sm-2 col-sm-label text-right" for="month">Month</label>
             <select id="month" name="month" class="form-control col-sm-9">
-                <option>January</option>
-                <option>February</option>
-                <option>March</option>
-                <option>April</option>
-                <option>May</option>
-                <option>June</option>
-                <option>July</option>
-                <option>August</option>
-                <option>September</option>
-                <option>October</option>
-                <option>November</option>
-                <option>December</option>
+              @foreach($months as $month)
+                @if($payment->month === $month)
+                  <option selected>{{ $month }}</option>
+                @else
+                  <option>{{ $month }}</option>
+                @endif
+              @endforeach
             </select>
         </div>
         <div class="form-group row monthly">
             <label class="col-sm-2 col-sm-label text-right" for="year">Year</label>
             <select id="year" name="year" class="form-control col-sm-9">
-                <option>{{ Date('Y') }}</option>
-                <option>{{ Date('Y')-1 }}</option>
-                <option>{{ Date('Y')+1 }}</option>
+                <option>{{ $payment->year }}</option>
+                <option>{{ (int)$payment->year-1 }}</option>
+                <option>{{ (int)$payment->year+1 }}</option>
             </select>
         </div>
         <div class="form-group row description">
             <label class="col-sm-2 col-sm-label text-right" for="description">Description</label>
             <textarea placeholder="Enter Description"
-                value="{{ old('description') }}"
+                value="{{ $payment->description }}"
                 id="description"
                 name="description"
                 rows="3"
                 style="resize: vertical;" 
                 spellcheck="false"
                 class="form-control col-sm-9"
-                ></textarea>
+                >{{ $payment->description }}</textarea>
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-sm-label text-right" for="amount">Payment Amount<span class="required text-danger">*</span></label>
             <input placeholder="Enter Amount"
-                value="{{ old('amount') }}"
+                value="{{ $payment->amount }}"
                 id="amount"
                 name="amount"
                 spellcheck="false"
@@ -79,7 +109,7 @@
         <div class="form-group row">
             <label class="col-sm-2 col-sm-label text-right" for="date">Payment Date<span class="required text-danger">*</span></label>
             <input placeholder="Enter Date"
-                value="{{ Date('Y-m-d') }}" 
+                value="{{ $payment->date }}" 
                 type="date" 
                 id="date"
                 name="date"

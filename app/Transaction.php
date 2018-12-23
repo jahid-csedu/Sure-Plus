@@ -4,13 +4,14 @@ namespace SurePlus;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Account extends Model
+class Transaction extends Model
 {
     //
     protected $fillable = [
+    	'id',
+    	'date',
     	'description',
     	'debit',
-    	'credit',
-    	'date'
+    	'credit'
     ];
 }

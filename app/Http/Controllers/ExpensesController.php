@@ -5,6 +5,7 @@ namespace SurePlus\Http\Controllers;
 use SurePlus\Expense;
 use SurePlus\Account;
 use SurePlus\Employee;
+use SurePlus\Transaction;
 use Illuminate\Http\Request;
 
 class ExpensesController extends Controller
@@ -54,8 +55,17 @@ class ExpensesController extends Controller
         $description = $request->description;
         $amount = $request->amount;
         $date = $request->date;
+        $transactionDetail = null;
+
+        $trx = Transaction::select('id')->orderBy('created_at', 'desc')->first();
+        if($trx) {
+          $trxId = $trx->id+1;
+        }else {
+          $trxId = 1;
+        }
 
         $expense = new Expense();
+        $expense->trx_id = $trxId;
         $expense->type = $request->type;
         if($request->type === 'Salary') {
             $employee = Employee::where('id', $employeeId)->first();
@@ -63,27 +73,36 @@ class ExpensesController extends Controller
               $expense->employee_id = $employeeId;
               $expense->month = $month;
               $expense->year = $year;
-              $expense->description = "Salary given to ".$employee->name."(".$employee->designation.") of the month ".$month."-".$year;
+              $transactionDetail = "Salary given to ".$employee->name."(".$employee->designation.") of the month ".$month."-".$year;
             }else{
               return redirect()->back()->withInput()->with('errors', 'Please enter a valid employee ID');
             }
         }else if($request->type === 'House Rent') {
             $expense->month = $month;
             $expense->year = $year;
-            $expense->description = "House Rent paid of the month ".$month."-".$year;
+            $transactionDetail = "House Rent paid of the month ".$month."-".$year;
         }else if($request->type === 'Bill'){
             $expense->month = $month;
             $expense->year = $year;
-            $expense->description = "Commodity Bill paid of the month ".$month."-".$year;
+            $transactionDetail = "Commodity Bill paid of the month ".$month."-".$year;
         }else{
             if($request->description == null){
               return redirect()->back()->withInput()->with('errors', 'Please enter a proper description');
             }
-            $expense->description = $request->description;
+            $transactionDetail = $description;
         }
+        $expense->description = $transactionDetail;
         $expense->amount = $request->amount;
         $expense->date = $request->date;
         if($expense->save()) {
+          //Add a record in transaction table
+            $transaction = new Transaction();
+            $transaction->id = $trxId;
+            $transaction->date = $date;
+            $transaction->description = $transactionDetail;
+            $transaction->debit = $amount;
+            $transaction->save();
+
             return redirect()->route('expenses.index')->with('success', 'The Expense information added successfully');
         }else {
             return redirect()->back()->withInput()->with('errors', 'Problem with adding the Expense information, Please try again');
@@ -110,7 +129,6 @@ class ExpensesController extends Controller
     public function edit(Expense $expense)
     {
         //
-        return view('expenses.edit', ['expense'=>$expense]);
     }
 
     /**
@@ -123,53 +141,6 @@ class ExpensesController extends Controller
     public function update(Request $request, Expense $expense)
     {
         //
-        $request->validate([
-            'type' => 'required|string|max:255',
-            'description' => 'nullable|string|max:255',
-            'amount' => 'required|integer',
-            'date' => 'required|date',
-        ]);
-
-        $employeeId = $request->employee_id;
-        $month = $request->month;
-        $year = $request->year;
-        $description = $request->description;
-        $amount = $request->amount;
-        $date = $request->date;
-
-        $expense = Expense::find($expense->id);
-        $expense->type = $request->type;
-        if($request->type === 'Salary') {
-            $employee = Teacher::where('id', $employeeId)->first();
-            if($employee){
-              $expense->employee_id = $employeeId;
-              $expense->month = $month;
-              $expense->year = $year;
-              $expense->description = "Salary given to ".$employee->name."(".$employee->designation.") of the month ".$month."-".$year;
-            }else{
-              return redirect()->back()->withInput()->with('errors', 'Please enter a valid employee ID');
-            }
-        }else if($request->type === 'House Rent') {
-            $expense->month = $month;
-            $expense->year = $year;
-            $expense->description = "House Rent paid of the month ".$month."-".$year;
-        }else if($request->type === 'Bill'){
-            $expense->month = $month;
-            $expense->year = $year;
-            $expense->description = "Commodity Bill paid of the month ".$month."-".$year;
-        }else{
-            if($request->description == null){
-              return redirect()->back()->withInput()->with('errors', 'Please enter a proper description');
-            }
-            $expense->description = $request->description;
-        }
-        $expense->amount = $request->amount;
-        $expense->date = $request->date;
-        if($expense->save()) {
-            return redirect()->route('expenses.index')->with('success', 'The Expense information updated successfully');
-        }else {
-            return redirect()->back()->withInput()->with('errors', 'Problem with updating the Expense information, Please try again');
-        }
     }
 
     /**
@@ -181,11 +152,6 @@ class ExpensesController extends Controller
     public function destroy(Expense $expense)
     {
         //
-        if($expense->delete()) {
-            return redirect()->route('expenses.index')->with('success','The expense record was deleted successfully');
-        }
-
-        return back()->withInput()->with('errors','Problem with deleting the expense record');
     }
 
     public function searchExpense(Request $request) {

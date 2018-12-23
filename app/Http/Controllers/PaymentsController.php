@@ -4,7 +4,7 @@ namespace SurePlus\Http\Controllers;
 
 use SurePlus\Payment;
 use SurePlus\Student;
-use SurePlus\Account;
+use SurePlus\Transaction;
 use Illuminate\Http\Request;
 
 class PaymentsController extends Controller
@@ -50,32 +50,48 @@ class PaymentsController extends Controller
         ]);
 
         $studentId = $request->student_id;
-        if(Student::find($studentId)) {
+        $student = Student::find($studentId);
+        if($student) {
+            $transactionDetail = null;
+
+            $trx = Transaction::select('id')->orderBy('created_at', 'desc')->first();
+            if($trx) {
+              $trxId = $trx->id+1;
+            }else {
+              $trxId = 1;
+            }
+
             $payment = new Payment();
+            $payment->trx_id = $trxId;
             $payment->student_id = $studentId;
             $payment->type = $request->type;
             if($request->type === 'Monthly Fee') {
                 $payment->month = $request->month;
                 $payment->year = $request->year;
+                $transactionDetail = "Payment Collected from ".$student->name."(Class: ".$student->class.", ID: ".$student->id.") of the month ".$request->month."-".$request->year;
+            }else if($request->type === 'Admission Fee') {
+                $transactionDetail = "Admission Fee Collected from ".$student->name."(Class: ".$student->class.", ID: ".$student->id.")";
+            }else if($request->type === 'Model Test Fee') {
+                $transactionDetail = "Model Test Fee Collected from ".$student->name."(Class: ".$student->class.", ID: ".$student->id.")";
             }
-            $payment->description = $request->description;
+            else {
+                $transactionDetail = $request->description;
+            }
+            $payment->description = $transactionDetail;
             $payment->amount = $request->amount;
             $payment->date = $request->date;
 
             if($payment->save()) {
-                $account = new Account();
-                if($request->type === 'Monthly Fee') {
-                    $account->description = "Payment Received of Student ".$studentId."(".$request->month."-".$request->year.")";
-                }else {
-                    $account->description = "Payment Received of Student ".$studentId."(".$request->type."-".$request->description.")";
-                }
-                $account->debit = 0;
-                $account->credit = $request->amount;
-                $account->date = $request->date;
-                $account->save();
+              //Add a record in transaction table
+                $transaction = new Transaction();
+                $transaction->id = $trxId;
+                $transaction->date = $request->date;
+                $transaction->description = $transactionDetail;
+                $transaction->debit = $request->amount;
+                $transaction->save();
                 return redirect()->route('payments.index')->with('success', 'Payment information added successfully');
             }else {
-                return redirect()->back()->withInput()->with('errors','Could not added payment information. Please try again');
+                return redirect()->back()->withInput()->with('errors','Could not add payment information. Please try again');
             }
         }else {
             return redirect()->back()->withInput()->with('errors', 'The student ID does not exist. Please enter a valid student ID');
@@ -103,6 +119,7 @@ class PaymentsController extends Controller
     public function edit(Payment $payment)
     {
         //
+        return view('payments.edit', ['payment'=>$payment]);
     }
 
     /**
@@ -115,6 +132,51 @@ class PaymentsController extends Controller
     public function update(Request $request, Payment $payment)
     {
         //
+        $request->validate([
+            'student_id' => 'required|string|max:255',
+            'type' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
+            'amount' => 'required|integer',
+            'date' => 'required|date'
+        ]);
+
+        $studentId = $request->student_id;
+        $student = Student::find($studentId);
+        if($student) {
+            $payment = Payment::find($payment->id);
+            $payment->student_id = $studentId;
+            $payment->type = $request->type;
+            $description = null;
+            if($request->type === 'Monthly Fee') {
+                $payment->month = $request->month;
+                $payment->year = $request->year;
+                $description = "Payment Collected from ".$student->name."(Class: ".$student->class.", ID: ".$student->id.") of the month ".$request->month."-".$request->year;
+            }else if($request->type === 'Admission Fee') {
+                $description = "Admission Fee Collected from ".$student->name."(Class: ".$student->class.", ID: ".$student->id.")";
+                if($request->description !== "") {
+                    $description .= "---".$request->description;
+                }
+            }else if($request->type === 'Model Test Fee') {
+                $description = "Model Test Fee Collected from ".$student->name."(Class: ".$student->class.", ID: ".$student->id.")";
+                if($request->description !== "") {
+                    $description .= "---".$request->description;
+                }
+            }
+            else {
+                $description = $request->description;
+            }
+            $payment->description = $description;
+            $payment->amount = $request->amount;
+            $payment->date = $request->date;
+
+            if($payment->save()) {
+                return redirect()->route('payments.index')->with('success', 'Payment information updated successfully');
+            }else {
+                return redirect()->back()->withInput()->with('errors','Could not update payment information. Please try again');
+            }
+        }else {
+            return redirect()->back()->withInput()->with('errors', 'The student ID does not exist. Please enter a valid student ID');
+        }
     }
 
     /**

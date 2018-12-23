@@ -90,12 +90,6 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/accounts">
-                  <i class="fas fa-money-check"></i>
-                  <b class="px-1">Accounts</b>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" href="/classes">
                   <i class="fas fa-bell "></i>
                   <b class="px-1">Classes</b>
@@ -105,6 +99,12 @@
                 <a class="nav-link" href="/sections">
                   <i class="fas fa-book"></i>
                   <b class="px-1">Sections</b>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/create_user">
+                  <i class="fas fa-user"></i>
+                  <b class="px-1">Create User</b>
                 </a>
               </li>
             </ul>
